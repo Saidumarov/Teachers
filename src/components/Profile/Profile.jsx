@@ -46,7 +46,7 @@ const Profile = () => {
       <div className="profil">
         <img src={userpn} alt="" />
         <div className="login">
-          <Input
+          <input
             type="user"
             placeholder="Name"
             required
@@ -55,7 +55,7 @@ const Profile = () => {
             className={`input ${name ? "active" : ""}`}
             onChange={hendelChange}
           />
-          <Input
+          <input
             type="password"
             placeholder="Password"
             required
