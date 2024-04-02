@@ -1,0 +1,45 @@
+{
+  "students": [
+    {
+      "id": "1",
+      "name": "Ja'farxon.",
+      "group": "N45",
+      "sur": "Saidumarov"
+    },
+    {
+      "id": "2",
+      "name": "Ja'farxon",
+      "group": "N44",
+      "sur": "Saidumarov"
+    },
+    {
+      "id": "3",
+      "name": "Ja'farxon",
+      "group": "N44",
+      "sur": "Saidumarov"
+    }
+  ],
+  "teachers": [
+    {
+      "id": "1",
+      "name": "Ja'farxon",
+      "group": "N45",
+      "sur": "Saidumarov",
+      "level": "senior"
+    },
+    {
+      "id": "2",
+      "name": "Ja'farxon",
+      "group": "N44",
+      "sur": "Saidumarov",
+      "level": "middle"
+    },
+    {
+      "id": "3",
+      "name": "Ja'farxon",
+      "group": "N44",
+      "sur": "Saidumarov",
+      "level": "junior"
+    }
+  ]
+}

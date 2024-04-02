@@ -1,0 +1,229 @@
+{
+  "hash": "b1089a14",
+  "configHash": "fb2fd2e3",
+  "lockfileHash": "e22bcaec",
+  "browserHash": "23c36a37",
+  "optimized": {
+    "react": {
+      "src": "../../node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "1de6837c",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "c45bbcb7",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "9c0ba705",
+      "needsInterop": false
+    },
+    "axios": {
+      "src": "../../node_modules/axios/index.js",
+      "file": "axios.js",
+      "fileHash": "fe0af777",
+      "needsInterop": false
+    },
+    "react-toastify": {
+      "src": "../../node_modules/react-toastify/dist/react-toastify.esm.mjs",
+      "file": "react-toastify.js",
+      "fileHash": "9ddd836b",
+      "needsInterop": false
+    },
+    "@mui/material": {
+      "src": "../../node_modules/@mui/material/index.js",
+      "file": "@mui_material.js",
+      "fileHash": "bc93d843",
+      "needsInterop": false
+    },
+    "react-paginate": {
+      "src": "../../node_modules/react-paginate/dist/react-paginate.js",
+      "file": "react-paginate.js",
+      "fileHash": "661b7b8c",
+      "needsInterop": true
+    },
+    "react-icons/gr": {
+      "src": "../../node_modules/react-icons/gr/index.mjs",
+      "file": "react-icons_gr.js",
+      "fileHash": "fe29789b",
+      "needsInterop": false
+    },
+    "@mui/material/AppBar": {
+      "src": "../../node_modules/@mui/material/AppBar/index.js",
+      "file": "@mui_material_AppBar.js",
+      "fileHash": "6a90919f",
+      "needsInterop": false
+    },
+    "@mui/material/Box": {
+      "src": "../../node_modules/@mui/material/Box/index.js",
+      "file": "@mui_material_Box.js",
+      "fileHash": "35d4639c",
+      "needsInterop": false
+    },
+    "@mui/material/Toolbar": {
+      "src": "../../node_modules/@mui/material/Toolbar/index.js",
+      "file": "@mui_material_Toolbar.js",
+      "fileHash": "73c7d9b2",
+      "needsInterop": false
+    },
+    "@mui/material/IconButton": {
+      "src": "../../node_modules/@mui/material/IconButton/index.js",
+      "file": "@mui_material_IconButton.js",
+      "fileHash": "7be25fab",
+      "needsInterop": false
+    },
+    "@mui/icons-material/Menu": {
+      "src": "../../node_modules/@mui/icons-material/Menu.js",
+      "file": "@mui_icons-material_Menu.js",
+      "fileHash": "55159ca9",
+      "needsInterop": true
+    },
+    "@mui/material/Container": {
+      "src": "../../node_modules/@mui/material/Container/index.js",
+      "file": "@mui_material_Container.js",
+      "fileHash": "d460965b",
+      "needsInterop": false
+    },
+    "@mui/material/Avatar": {
+      "src": "../../node_modules/@mui/material/Avatar/index.js",
+      "file": "@mui_material_Avatar.js",
+      "fileHash": "d2ac96d4",
+      "needsInterop": false
+    },
+    "@mui/material/Drawer": {
+      "src": "../../node_modules/@mui/material/Drawer/index.js",
+      "file": "@mui_material_Drawer.js",
+      "fileHash": "366e277c",
+      "needsInterop": false
+    },
+    "@mui/material/List": {
+      "src": "../../node_modules/@mui/material/List/index.js",
+      "file": "@mui_material_List.js",
+      "fileHash": "8e659e55",
+      "needsInterop": false
+    },
+    "@mui/material/Divider": {
+      "src": "../../node_modules/@mui/material/Divider/index.js",
+      "file": "@mui_material_Divider.js",
+      "fileHash": "94b20619",
+      "needsInterop": false
+    },
+    "@mui/material/ListItem": {
+      "src": "../../node_modules/@mui/material/ListItem/index.js",
+      "file": "@mui_material_ListItem.js",
+      "fileHash": "5cbe39ab",
+      "needsInterop": false
+    },
+    "@mui/material/ListItemButton": {
+      "src": "../../node_modules/@mui/material/ListItemButton/index.js",
+      "file": "@mui_material_ListItemButton.js",
+      "fileHash": "b74d5e3c",
+      "needsInterop": false
+    },
+    "@mui/material/ListItemText": {
+      "src": "../../node_modules/@mui/material/ListItemText/index.js",
+      "file": "@mui_material_ListItemText.js",
+      "fileHash": "fbb18401",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-GXIRQ7AO": {
+      "file": "chunk-GXIRQ7AO.js"
+    },
+    "chunk-33FBUPHI": {
+      "file": "chunk-33FBUPHI.js"
+    },
+    "chunk-IKRJTYWR": {
+      "file": "chunk-IKRJTYWR.js"
+    },
+    "chunk-LT5I5SFO": {
+      "file": "chunk-LT5I5SFO.js"
+    },
+    "chunk-6C6RGJYK": {
+      "file": "chunk-6C6RGJYK.js"
+    },
+    "chunk-XDRZFYS5": {
+      "file": "chunk-XDRZFYS5.js"
+    },
+    "chunk-YGPPHLUY": {
+      "file": "chunk-YGPPHLUY.js"
+    },
+    "chunk-H2GFQEF7": {
+      "file": "chunk-H2GFQEF7.js"
+    },
+    "chunk-XJEP5UGB": {
+      "file": "chunk-XJEP5UGB.js"
+    },
+    "chunk-MJHDAMZP": {
+      "file": "chunk-MJHDAMZP.js"
+    },
+    "chunk-R7SULO4S": {
+      "file": "chunk-R7SULO4S.js"
+    },
+    "chunk-3LVZHCEX": {
+      "file": "chunk-3LVZHCEX.js"
+    },
+    "chunk-ITQYVY42": {
+      "file": "chunk-ITQYVY42.js"
+    },
+    "chunk-5TZUO2MK": {
+      "file": "chunk-5TZUO2MK.js"
+    },
+    "chunk-2XUSPBXZ": {
+      "file": "chunk-2XUSPBXZ.js"
+    },
+    "chunk-TDWF6KGU": {
+      "file": "chunk-TDWF6KGU.js"
+    },
+    "chunk-CC3QQPM2": {
+      "file": "chunk-CC3QQPM2.js"
+    },
+    "chunk-7KFGS6CB": {
+      "file": "chunk-7KFGS6CB.js"
+    },
+    "chunk-VPOLKPRI": {
+      "file": "chunk-VPOLKPRI.js"
+    },
+    "chunk-OT63XR3X": {
+      "file": "chunk-OT63XR3X.js"
+    },
+    "chunk-3YZHBZGN": {
+      "file": "chunk-3YZHBZGN.js"
+    },
+    "chunk-PTJNCJNE": {
+      "file": "chunk-PTJNCJNE.js"
+    },
+    "chunk-YVMXRGZY": {
+      "file": "chunk-YVMXRGZY.js"
+    },
+    "chunk-KQQZXQR5": {
+      "file": "chunk-KQQZXQR5.js"
+    },
+    "chunk-JLQ5OP2A": {
+      "file": "chunk-JLQ5OP2A.js"
+    },
+    "chunk-LPFB26IS": {
+      "file": "chunk-LPFB26IS.js"
+    },
+    "chunk-7Z4SA4EU": {
+      "file": "chunk-7Z4SA4EU.js"
+    },
+    "chunk-FBRNPY62": {
+      "file": "chunk-FBRNPY62.js"
+    },
+    "chunk-AFGACLBJ": {
+      "file": "chunk-AFGACLBJ.js"
+    },
+    "chunk-UM3JHGVO": {
+      "file": "chunk-UM3JHGVO.js"
+    },
+    "chunk-CEQRFMJQ": {
+      "file": "chunk-CEQRFMJQ.js"
+    }
+  }
+}
