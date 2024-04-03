@@ -56,10 +56,10 @@ function Header() {
     if (herf == "/students/add") {
       setText("Add Student");
     }
-    if (herf == "/teachers/edit/:id") {
+    if (herf.includes("/teachers/edit")) {
       setText("Edit Teacher");
     }
-    if (herf == "/students/edit/:id") {
+    if (herf.includes("/students/edit")) {
       setText("Edit Student");
     }
   }, [herf]);
