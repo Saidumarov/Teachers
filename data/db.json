@@ -3,20 +3,44 @@
     {
       "id": "1",
       "name": "Ja'farxon",
-      "group": "N45",
+      "group": "N44",
       "sur": "Saidumarov"
     },
     {
       "id": "2",
-      "name": "Ja'farxon",
+      "name": "Akmal",
       "group": "N44",
-      "sur": "Saidumarov"
+      "sur": "Diyorov"
     },
     {
       "id": "3",
       "name": "Ja'farxon",
       "group": "N44",
       "sur": "Saidumarov"
+    },
+    {
+      "id": "4",
+      "name": "Alisher",
+      "group": "N45",
+      "sur": "Bobomurodov"
+    },
+    {
+      "id": "5",
+      "name": "Ja'farxon",
+      "group": "N45",
+      "sur": "Saidumarov"
+    },
+    {
+      "id": "6",
+      "name": "Azim",
+      "group": "N45",
+      "sur": "Narzullayev"
+    },
+    {
+      "id": "7",
+      "name": "Bobur",
+      "group": "N44",
+      "sur": "Bobomurodov"
     }
   ],
   "teachers": [
@@ -29,10 +53,10 @@
     },
     {
       "id": "2",
-      "name": "Ja'farxon",
+      "name": "Akmal",
       "group": "N44",
-      "sur": "Saidumarov",
-      "level": "middle"
+      "sur": "Diyorov",
+      "level": "junior"
     },
     {
       "id": "3",
@@ -40,6 +64,34 @@
       "group": "N45",
       "sur": "Saidumarov",
       "level": "senior"
+    },
+    {
+      "id": "4",
+      "name": "Alisher",
+      "group": "N45",
+      "sur": "Bobomurodov",
+      "level": "middle"
+    },
+    {
+      "id": "5",
+      "name": "Azim",
+      "group": "N45",
+      "sur": "Narzullayev",
+      "level": "junior"
+    },
+    {
+      "id": "7",
+      "name": "Bobur",
+      "group": "N44",
+      "sur": "Bobomurodov",
+      "level": "middle"
+    },
+    {
+      "id": "7",
+      "name": "Ja'farxon",
+      "group": "N44",
+      "sur": "Saidumarov",
+      "level": "middle"
     }
   ]
 }

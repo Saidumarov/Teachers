@@ -18,7 +18,7 @@ export default function Teachers() {
   const [grup, setGrup] = useState();
   const [level, setLevel] = useState();
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
   //
   const fetchData = () => {
     axios.get("http://localhost:3000/teachers").then((res) => {

@@ -8,14 +8,13 @@ import { toast } from "react-toastify";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import { Button, Input, Select } from "antd";
-import { Option } from "antd/es/mentions";
 export default function Students() {
   const navegate = useNavigate();
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
   const [grup, setGrup] = useState();
   const [itemOffset, setItemOffset] = useState(0);
-  const itemsPerPage = 10;
+  const itemsPerPage = 5;
   //
   const fetchData = () => {
     axios.get("http://localhost:3000/students").then((res) => {
