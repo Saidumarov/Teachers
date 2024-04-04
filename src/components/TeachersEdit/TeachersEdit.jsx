@@ -5,7 +5,9 @@ import "./index.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Button, Container } from "@mui/material";
+import { Container } from "@mui/material";
+import { Button, Input, Select } from "antd";
+import { Option } from "antd/es/mentions";
 
 const TeachersEdit = () => {
   const navegate = useNavigate();
@@ -70,8 +72,7 @@ const TeachersEdit = () => {
       <Container>
         <div className="add">
           <div className="form">
-            <label htmlFor="name">Firstname</label>
-            <input
+            <Input
               type="name"
               onChange={handelChange}
               placeholder="Firstname"
@@ -81,7 +82,6 @@ const TeachersEdit = () => {
             />
           </div>
           <div className="form">
-            <label htmlFor="sur">Surname</label>
             <input
               onChange={handelChange}
               type="username"
@@ -92,33 +92,32 @@ const TeachersEdit = () => {
             />
           </div>
           <div className="form">
-            <select name="group" value={user.group} onChange={handelChange}>
-              <option value="all">Group</option>
-              <option value="N45">N45</option>
-              <option value="N44">N44</option>
-            </select>
+            <Select name="group" value={user.group} onChange={handelChange}>
+              <Option value="all">Group</Option>
+              <Option value="N45">N45</Option>
+              <Option value="N44">N44</Option>
+            </Select>
           </div>
           <div className="form">
-            <select name="level" value={user.level} onChange={handelChange1}>
-              <option value="all">Level</option>
-              <option value="senior">Senior</option>
-              <option value="middle">Middle</option>
-              <option value="junior">Junior</option>
-            </select>
+            <Select name="level" value={user.level} onChange={handelChange1}>
+              <Option value="all">Level</Option>
+              <Option value="senior">Senior</Option>
+              <Option value="middle">Middle</Option>
+              <Option value="junior">Junior</Option>
+            </Select>
           </div>
         </div>
         <Button
+          type="primary"
           className="save"
-          variant="contained"
-          color="primary"
           onClick={editAdd}
           disabled={!user.name || !user.group || !user.sur || !user.level}
         >
           Update
         </Button>
         <Button
-          variant="contained"
-          color="warning"
+          type="primary"
+          danger
           className="save"
           onClick={() => navegate("/")}
         >

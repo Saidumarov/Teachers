@@ -1,70 +1,83 @@
-import React from "react";
-
-import { useState } from "react";
+import { Button, Form, Input } from "antd";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Button } from "@mui/material";
-const LoginPanel = ({ login }) => {
-  const [name, setName] = useState(false);
-  const [password, setpassword] = useState(false);
-  const navigation = useNavigate();
-  const [user, setUser] = useState({
-    name: "",
-    password: "",
-  });
-  const hendelSubmit = () => {
-    if (user.name && user.password !== "") {
-      localStorage.setItem("user", JSON.stringify(user));
-      toast.success("User saved successfully");
-      navigation("/");
-      login(true);
-    } else {
-      if (user.name === "") {
-        setName(true);
-      }
-      if (user.password === "") {
-        setpassword(true);
-      }
-    }
-  };
-  const hendelChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value.trim() });
-    setpassword(false);
-    setName(false);
-  };
 
+const LoginPanel = ({ login }) => {
+  const navigation = useNavigate();
+
+  const onFinish = (values) => {
+    localStorage.setItem("user", JSON.stringify(values));
+    toast.success("User saved successfully");
+    navigation("/");
+    login(true);
+  };
+  const onFinishFailed = (errorInfo) => {
+    console.log("Failed:", errorInfo);
+  };
   return (
-    <>
-      <div className="login_p">
-        <div className="container">
-          <div className="login">
-            <form onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="user"
-                placeholder="Name"
-                required
-                name="name"
-                value={user.name}
-                className={`input ${name ? "active" : ""}`}
-                onChange={hendelChange}
-              />
-              <input
-                type="password"
-                placeholder="Password"
-                required
+    <div className="login_p">
+      <div className="container">
+        <div className="login">
+          <div className="login_item">
+            <p>Login</p>
+            <Form
+              name="basic"
+              labelCol={{
+                span: 8,
+              }}
+              wrapperCol={{
+                span: 16,
+              }}
+              style={{
+                maxWidth: 600,
+              }}
+              initialValues={{
+                remember: true,
+              }}
+              onFinish={onFinish}
+              onFinishFailed={onFinishFailed}
+              autoComplete="off"
+            >
+              <Form.Item
+                label="Username"
+                name="username"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your username!",
+                  },
+                ]}
+              >
+                <Input />
+              </Form.Item>
+              <Form.Item
+                label="Password"
                 name="password"
-                value={user.password}
-                onChange={hendelChange}
-                className={`input ${password ? "active" : ""}`}
-              />
-              <Button onClick={hendelSubmit}>Login</Button>
-            </form>
+                rules={[
+                  {
+                    required: true,
+                    message: "Please input your password!",
+                  },
+                ]}
+              >
+                <Input.Password />
+              </Form.Item>
+              <Form.Item
+                wrapperCol={{
+                  offset: 8,
+                  span: 16,
+                }}
+              >
+                <Button type="primary" htmlType="submit">
+                  Submit
+                </Button>
+              </Form.Item>
+            </Form>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
-
 export default LoginPanel;

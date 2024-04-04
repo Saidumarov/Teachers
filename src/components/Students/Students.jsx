@@ -1,6 +1,4 @@
-import React from "react";
-
-import { Button, Container, TextField } from "@mui/material";
+import { Container } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
@@ -9,7 +7,10 @@ import Edit, { Delete } from "../../constants";
 import { toast } from "react-toastify";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
+import { Button, Input, Select } from "antd";
+
 import "./index.scss";
+import { Option } from "antd/es/mentions";
 export default function Students() {
   const navegate = useNavigate();
   const [data, setData] = useState([]);
@@ -89,25 +90,25 @@ export default function Students() {
       <div className="container">
         <div className="filter">
           <div className="input">
-            <TextField
+            <Input
               type="text"
-              label="Search"
-              variant="outlined"
+              placeholder="Search..."
+              style={{ height: "50px" }}
+              allowClear
               onChange={(e) => search(e.target.value)}
             />
           </div>
           <div className="filter_item">
-            <select value={grup} onChange={handleChange}>
-              <option value="all">Group</option>
-              <option value="N45">N45</option>
-              <option value="N44">N44</option>
-            </select>
+            <Select value={grup} placeholder="Group" onChange={handleChange}>
+              <Option value="all">Group</Option>
+              <Option value="N45">N45</Option>
+              <Option value="N44">N44</Option>
+            </Select>
           </div>
           <Button
             id="addT"
             className="addT"
-            variant="contained"
-            color="success"
+            type="primary"
             onClick={() => navegate("/students/add")}
           >
             Add
@@ -130,12 +131,21 @@ export default function Students() {
                 <p>{el?.sur}</p>
                 <p> {el?.group} </p>
                 <p>
-                  <button className="edit" onClick={() => edit(el?.id)}>
+                  <Button
+                    type="primary"
+                    className="edit"
+                    onClick={() => edit(el?.id)}
+                  >
                     <Edit />
-                  </button>
-                  <button className="delete" onClick={() => deleteAdd(el?.id)}>
+                  </Button>
+                  <Button
+                    type="primary"
+                    danger
+                    className="delete"
+                    onClick={() => deleteAdd(el?.id)}
+                  >
                     <Delete />
-                  </button>
+                  </Button>
                 </p>
               </div>
             ))

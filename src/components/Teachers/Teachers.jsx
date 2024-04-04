@@ -1,6 +1,7 @@
 import React from "react";
 
-import { Button, Container, TextField } from "@mui/material";
+import { Container } from "@mui/material";
+import { Button } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
@@ -10,6 +11,8 @@ import { toast } from "react-toastify";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import "./index.scss";
+import { Input, Select } from "antd";
+import { Option } from "antd/es/mentions";
 export default function Teachers() {
   const navegate = useNavigate();
   const [data, setData] = useState([]);
@@ -99,33 +102,34 @@ export default function Teachers() {
       <div className="container">
         <div className="filter">
           <div className="input">
-            <TextField
+            <Input
               type="text"
-              label="Search"
+              placeholder="Search..."
               variant="outlined"
+              style={{ height: "50px" }}
+              allowClear
               onChange={(e) => search(e.target.value)}
             />
           </div>
           <div className="filter_item">
-            <select value={grup} onChange={handleChange}>
-              <option value="all">Group</option>
-              <option value="N45">N45</option>
-              <option value="N44">N44</option>
-            </select>
+            <Select placeholder="Group" value={grup} onChange={handleChange}>
+              <Option value="all">Group</Option>
+              <Option value="N45">N45</Option>
+              <Option value="N44">N44</Option>
+            </Select>
           </div>
           <div className="filter_item" id="filter">
-            <select value={level} onChange={handleChange1}>
-              <option value="all">Level</option>
-              <option value="senior">Senior</option>
-              <option value="middle">Middle</option>
-              <option value="junior">Junior</option>
-            </select>
+            <Select placeholder="Level" value={level} onChange={handleChange1}>
+              <Option value="all">Level</Option>
+              <Option value="senior">Senior</Option>
+              <Option value="middle">Middle</Option>
+              <Option value="junior">Junior</Option>
+            </Select>
           </div>
           <Button
             id="addT1"
             className="addT"
-            variant="contained"
-            color="success"
+            type="primary"
             onClick={() => navegate("/teachers/add")}
           >
             Add
@@ -150,12 +154,21 @@ export default function Teachers() {
                 <p> {el?.group} </p>
                 <p> {el?.level} </p>
                 <p>
-                  <button className="edit" onClick={() => edit(el?.id)}>
+                  <Button
+                    type="primary"
+                    className="edit"
+                    onClick={() => edit(el?.id)}
+                  >
                     <Edit />
-                  </button>
-                  <button className="delete" onClick={() => deleteAdd(el?.id)}>
+                  </Button>
+                  <Button
+                    type="primary"
+                    danger
+                    className="delete"
+                    onClick={() => deleteAdd(el?.id)}
+                  >
                     <Delete />
-                  </button>
+                  </Button>
                 </p>
               </div>
             ))

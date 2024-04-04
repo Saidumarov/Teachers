@@ -34,7 +34,7 @@
   }
   .btn {
     display: flex;
-    padding: 0 70px 0 70px;
+    padding: 0 120px 0 120px;
     button {
       width: 40%;
       height: 50px;
@@ -44,15 +44,12 @@
       outline: none;
       margin-top: 30px;
       cursor: pointer;
-      background-color: rgb(91, 91, 227);
       color: white;
       font-size: 16px;
       border-radius: 8px;
     }
-    button:nth-child(2) {
-      background-color: white;
-      color: black;
-      border: 1px solid rgb(91, 91, 227);
+    button:nth-child(1):hover {
+      background-color: rgb(91, 91, 227);
     }
   }
 }
@@ -65,9 +62,3 @@
     }
   }
 }
-
-// .css-bz5ng3-MuiInputBase-root-MuiInput-root {
-//   display: -webkit-box !important;
-//   border: none !important;
-//   outline: none !important;
-// }

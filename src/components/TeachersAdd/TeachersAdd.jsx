@@ -1,11 +1,12 @@
-import React from "react";
-
 import { useEffect, useState } from "react";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Button, Container } from "@mui/material";
+import { Container } from "@mui/material";
+import { Button } from "antd";
+import { Input, Select } from "antd";
+import { Option } from "antd/es/mentions";
 
 const TeachersAdd = () => {
   const navegate = useNavigate();
@@ -54,8 +55,7 @@ const TeachersAdd = () => {
       <Container>
         <div className="add">
           <div className="form">
-            <label htmlFor="name">Firstname</label>
-            <input
+            <Input
               type="name"
               onChange={handelChange}
               placeholder="Firstname"
@@ -64,8 +64,7 @@ const TeachersAdd = () => {
             />
           </div>
           <div className="form">
-            <label htmlFor="sur">Surname</label>
-            <input
+            <Input
               onChange={handelChange}
               type="username"
               placeholder="Surname"
@@ -74,24 +73,21 @@ const TeachersAdd = () => {
             />
           </div>
           <div className="form">
-            <select name="group" onChange={handelChange}>
-              <option value="all">Group</option>
-              <option value="N45">N45</option>
-              <option value="N44">N44</option>
-            </select>
+            <Select name="group" placeholder="Group" onChange={handelChange}>
+              <Option value="N45">N45</Option>
+              <Option value="N44">N44</Option>
+            </Select>
           </div>
           <div className="form">
-            <select name="level" onChange={handelChange1}>
-              <option value="all">Level</option>
-              <option value="senior">Senior</option>
-              <option value="middle">Middle</option>
-              <option value="junior">Junior</option>
-            </select>
+            <Select placeholder="Level" onChange={handelChange}>
+              <Option value="senior">Senior</Option>
+              <Option value="middle">Middle</Option>
+              <Option value="junior">Junior</Option>
+            </Select>
           </div>
         </div>
         <Button
-          variant="contained"
-          color="success"
+          type="primary"
           className="save"
           onClick={add}
           disabled={!user.name || !user.group || !user.sur || !user.level}
@@ -99,8 +95,8 @@ const TeachersAdd = () => {
           Save
         </Button>
         <Button
-          variant="contained"
-          color="warning"
+          type="primary"
+          danger
           className="save"
           onClick={() => navegate("/")}
         >

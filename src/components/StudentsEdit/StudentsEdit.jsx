@@ -1,10 +1,10 @@
-import React from "react";
-
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Button, Container } from "@mui/material";
+import { Container } from "@mui/material";
+import { Button, Input, Select } from "antd";
+import { Option } from "antd/es/mentions";
 
 const StudentsEdit = () => {
   const navegate = useNavigate();
@@ -60,8 +60,7 @@ const StudentsEdit = () => {
       <Container>
         <div className="add">
           <div className="form">
-            <label htmlFor="name">Firstname</label>
-            <input
+            <Input
               type="name"
               onChange={handelChange}
               placeholder="Firstname"
@@ -71,8 +70,7 @@ const StudentsEdit = () => {
             />
           </div>
           <div className="form">
-            <label htmlFor="sur">Surname</label>
-            <input
+            <Input
               onChange={handelChange}
               type="username"
               placeholder="Surname"
@@ -82,16 +80,15 @@ const StudentsEdit = () => {
             />
           </div>
           <div className="form">
-            <select name="group" value={user.group} onChange={handelChange}>
-              <option value="all">Group</option>
-              <option value="N45">N45</option>
-              <option value="N44">N44</option>
-            </select>
+            <Select name="group" value={user.group} onChange={handelChange}>
+              <Option value="all">Group</Option>
+              <Option value="N45">N45</Option>
+              <Option value="N44">N44</Option>
+            </Select>
           </div>
         </div>
         <Button
-          variant="contained"
-          color="success"
+          type="primary"
           className="save"
           onClick={editAdd}
           disabled={!user.name || !user.group || !user.sur}
@@ -99,9 +96,9 @@ const StudentsEdit = () => {
           Update
         </Button>
         <Button
-          variant="contained"
-          color="warning"
+          type="primary"
           className="save"
+          danger
           onClick={() => navegate("/students")}
         >
           Close

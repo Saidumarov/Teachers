@@ -6,62 +6,65 @@
     justify-content: center;
     height: 100vh;
   }
-
   .login {
-    width: 70%;
+    width: 50%;
     height: 500px;
     background-color: white;
     border-radius: 8px;
-    form {
+    display: flex;
+    align-items: center;
+    .login_item {
+      margin-left: 26%;
+    }
+    button {
       width: 100%;
-      padding-top: 90px;
-      input {
-        display: block;
-        width: 70%;
-        margin: 0 auto;
-        border: none;
-        outline: none;
-        background-color: rgb(247, 247, 255);
-        height: 50px;
-        margin-top: 30px;
-        border-radius: 8px;
-        padding-left: 50px;
-        font-size: 18px;
-      }
-      button {
-        width: 70%;
-        height: 50px;
-        display: block;
-        margin: 0 auto;
-        border: none;
-        outline: none;
-        margin-top: 30px;
-        cursor: pointer;
-        background-color: rgb(91, 91, 227);
-        color: white;
-        font-size: 16px;
-        border-radius: 8px;
-      }
-      .input.active {
-        border: 1px solid rgba(255, 0, 0, 0.416);
+    }
+    p {
+      font-family: Roboto;
+      font-size: 25px;
+      text-align: center;
+      padding-bottom: 20px;
+      padding-left: 80px;
+    }
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .login_p {
+    .login {
+      width: 90%;
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .login_p {
+    .login {
+      width: 90%;
+      justify-content: center;
+      .login_item {
+        margin-left: 0;
       }
     }
   }
 }
 
-
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 575px) {
   .login_p {
     .login {
       width: 90%;
-      form {
-        input {
-          width: 90%;
-        }
-        button {
-          width: 90%;
-        }
+      justify-content: center;
+      .login_item {
+        margin-left: 0;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      p {
+        padding: 0;
+      }
+      button {
+        margin-left: 0 !important;
+        width: auto;
       }
     }
   }

@@ -1,11 +1,9 @@
-import React from "react";
-
 import "./index.scss";
 import userpn from "../../assets/2.jpg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { Button, Input } from "@mui/material";
+import { Button, Input } from "antd";
 const Profile = () => {
   const [name, setName] = useState(false);
   const [password, setpassword] = useState(false);
@@ -46,7 +44,7 @@ const Profile = () => {
       <div className="profil">
         <img src={userpn} alt="" />
         <div className="login">
-          <input
+          <Input
             type="user"
             placeholder="Name"
             required
@@ -55,7 +53,7 @@ const Profile = () => {
             className={`input ${name ? "active" : ""}`}
             onChange={hendelChange}
           />
-          <input
+          <Input
             type="password"
             placeholder="Password"
             required
@@ -65,8 +63,12 @@ const Profile = () => {
             className={`input ${password ? "active" : ""}`}
           />
           <div className="btn">
-            <Button onClick={hendelSubmit}>Update</Button>
-            <Button onClick={hendelLogaut}>Logaut</Button>
+            <Button type="primary" onClick={hendelSubmit}>
+              Update
+            </Button>
+            <Button type="primary" danger onClick={hendelLogaut}>
+              Logaut
+            </Button>
           </div>
         </div>
       </div>

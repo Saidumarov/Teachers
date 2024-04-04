@@ -1,10 +1,10 @@
-import React from "react";
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Button, Container } from "@mui/material";
+import { Container } from "@mui/material";
+import { Button, Input, Select } from "antd";
+import { Option } from "antd/es/mentions";
 
 const StudentsAdd = () => {
   const navegate = useNavigate();
@@ -45,8 +45,7 @@ const StudentsAdd = () => {
       <Container>
         <div className="add">
           <div className="form">
-            <label htmlFor="name">Firstname</label>
-            <input
+            <Input
               type="name"
               onChange={handelChange}
               placeholder="Firstname"
@@ -55,8 +54,7 @@ const StudentsAdd = () => {
             />
           </div>
           <div className="form">
-            <label htmlFor="sur">Surname</label>
-            <input
+            <Input
               onChange={handelChange}
               type="username"
               placeholder="Surname"
@@ -65,16 +63,14 @@ const StudentsAdd = () => {
             />
           </div>
           <div className="form">
-            <select name="group" onChange={handelChange}>
-              <option value="all">Group</option>
-              <option value="N45">N45</option>
-              <option value="N44">N44</option>
-            </select>
+            <Select name="group" placeholder="Group" onChange={handelChange}>
+              <Option value="N45">N45</Option>
+              <Option value="N44">N44</Option>
+            </Select>
           </div>
         </div>
         <Button
-          variant="contained"
-          color="success"
+          type="primary"
           className="save"
           onClick={add}
           disabled={!user.name || !user.group || !user.sur}
@@ -82,8 +78,8 @@ const StudentsAdd = () => {
           Save
         </Button>
         <Button
-          variant="contained"
-          color="warning"
+          type="primary"
+          danger
           className="save"
           onClick={() => navegate("/students")}
         >
