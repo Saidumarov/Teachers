@@ -8,8 +8,6 @@ import { toast } from "react-toastify";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import { Button, Input, Select } from "antd";
-
-import "./index.scss";
 import { Option } from "antd/es/mentions";
 export default function Students() {
   const navegate = useNavigate();
