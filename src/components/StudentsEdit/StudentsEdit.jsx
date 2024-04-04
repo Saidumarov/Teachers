@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Container } from "@mui/material";
 import { Button, Input, Select } from "antd";
+import { Users } from "../../provider";
 
 const StudentsEdit = () => {
   const navegate = useNavigate();
   const { id } = useParams();
+  const { userData, setUserData } = useContext(Users);
   const [user, setUser] = useState({
     id: "",
     name: "",
@@ -41,6 +43,7 @@ const StudentsEdit = () => {
       .put(`http://localhost:3000/students/${id}`, user)
       .then((res) => {
         toast.success("Edit Student Success ");
+        setUserData(res.data);
       })
       .catch((err) => {
         console.log(err);

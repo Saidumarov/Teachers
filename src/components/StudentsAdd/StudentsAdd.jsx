@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Container } from "@mui/material";
 import { Button, Input, Select } from "antd";
+import { Users } from "../../provider";
 
 const StudentsAdd = () => {
   const navegate = useNavigate();
   const [users, setUsers] = useState([]);
+  const { userData, setUserData } = useContext(Users);
   const [user, setUser] = useState({
     name: "",
     group: "",
@@ -27,7 +29,7 @@ const StudentsAdd = () => {
   const add = async () => {
     const newData = { ...user, id: users.length + 1 + "" };
     await axios.post("http://localhost:3000/students", newData).then((res) => {
-      console.log(res.data);
+      setUserData(res.data);
       navegate("/students");
       toast.success("Added Student Success");
     });

@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import Edit, { Delete } from "../../constants";
@@ -8,10 +8,12 @@ import { toast } from "react-toastify";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import { Button, Input, Select } from "antd";
+import { Users } from "../../provider";
 export default function Students() {
   const navegate = useNavigate();
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
+  const { userData, setUserData } = useContext(Users);
   const [grup, setGrup] = useState();
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 5;
@@ -28,7 +30,7 @@ export default function Students() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [userData]);
 
   //
 

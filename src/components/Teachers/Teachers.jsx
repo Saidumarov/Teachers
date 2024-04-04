@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import { Button } from "antd";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import Edit, { Delete } from "../../constants";
@@ -10,6 +10,7 @@ import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import "./index.scss";
 import { Input, Select } from "antd";
+import { Users } from "../../provider";
 
 export default function Teachers() {
   const navegate = useNavigate();
@@ -18,6 +19,7 @@ export default function Teachers() {
   const [grup, setGrup] = useState();
   const [level, setLevel] = useState();
   const [itemOffset, setItemOffset] = useState(0);
+  const { userData, setUserData } = useContext(Users);
   const itemsPerPage = 5;
   //
   const fetchData = () => {
@@ -31,7 +33,7 @@ export default function Teachers() {
   //
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [userData]);
 
   //
 
@@ -45,12 +47,10 @@ export default function Teachers() {
     const newOffset = selectedPage * itemsPerPage;
     setItemOffset(newOffset);
   };
-
   //
 
   const handleChange = (value) => {
     setGrup(value);
-    console.log(value);
     let newperson = data1?.filter((el) => {
       return value === "all" ? el : el?.group === value;
     });
