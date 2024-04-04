@@ -48,7 +48,7 @@
   }
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 920px) {
   .tr1 {
     height: 100px;
     p:nth-child(1) {
@@ -231,7 +231,7 @@
       width: auto;
     }
   }
-  @media (max-width: 500px) {
+  @media (max-width: 550px) {
     display: flex;
     flex-wrap: wrap;
     .filter_item {
@@ -296,7 +296,7 @@
   @media (max-width: 750px) {
     width: auto;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 550px) {
     width: 50%;
   }
 }

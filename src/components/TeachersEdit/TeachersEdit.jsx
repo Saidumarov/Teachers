@@ -1,5 +1,3 @@
-import React from "react";
-
 import { useEffect, useState } from "react";
 import "./index.scss";
 import { useNavigate, useParams } from "react-router-dom";
@@ -7,7 +5,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Container } from "@mui/material";
 import { Button, Input, Select } from "antd";
-import { Option } from "antd/es/mentions";
 
 const TeachersEdit = () => {
   const navegate = useNavigate();
@@ -60,13 +57,6 @@ const TeachersEdit = () => {
     });
   };
 
-  const handelChange1 = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
-
   return (
     <>
       <Container>
@@ -92,18 +82,28 @@ const TeachersEdit = () => {
             />
           </div>
           <div className="form">
-            <Select name="group" value={user.group} onChange={handelChange}>
-              <Option value="all">Group</Option>
-              <Option value="N45">N45</Option>
-              <Option value="N44">N44</Option>
+            <Select
+              name="group"
+              value={user.group}
+              onChange={(value) =>
+                handelChange({ target: { name: "group", value } })
+              }
+            >
+              <Select.Option value="N45">N45</Select.Option>
+              <Select.Option value="N44">N44</Select.Option>
             </Select>
           </div>
           <div className="form">
-            <Select name="level" value={user.level} onChange={handelChange1}>
-              <Option value="all">Level</Option>
-              <Option value="senior">Senior</Option>
-              <Option value="middle">Middle</Option>
-              <Option value="junior">Junior</Option>
+            <Select
+              name="level"
+              value={user.level}
+              onChange={(value) =>
+                handelChange({ target: { name: "level", value } })
+              }
+            >
+              <Select.Option value="senior">Senior</Select.Option>
+              <Select.Option value="middle">Middle</Select.Option>
+              <Select.Option value="junior">Junior</Select.Option>
             </Select>
           </div>
         </div>

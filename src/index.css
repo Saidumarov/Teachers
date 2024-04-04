@@ -20,6 +20,9 @@ body {
   top: 0 !important;
   z-index: 20;
 }
+.avatar {
+  margin-right: 130px;
+}
 .header {
   position: sticky !important;
   top: 0 !important;
@@ -36,5 +39,10 @@ body {
 @media (min-width: 1600px) {
   .home {
     height: 100vh;
+  }
+}
+@media (max-width: 600px) {
+  .avatar {
+    margin-right: 20px;
   }
 }

@@ -4,7 +4,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { Container } from "@mui/material";
 import { Button, Input, Select } from "antd";
-import { Option } from "antd/es/mentions";
 
 const StudentsAdd = () => {
   const navegate = useNavigate();
@@ -63,9 +62,15 @@ const StudentsAdd = () => {
             />
           </div>
           <div className="form">
-            <Select name="group" placeholder="Group" onChange={handelChange}>
-              <Option value="N45">N45</Option>
-              <Option value="N44">N44</Option>
+            <Select
+              name="group"
+              placeholder="Group"
+              onChange={(value) =>
+                handelChange({ target: { name: "group", value } })
+              }
+            >
+              <Select.Option value="N45">N45</Select.Option>
+              <Select.Option value="N44">N44</Select.Option>
             </Select>
           </div>
         </div>

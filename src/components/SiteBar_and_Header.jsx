@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  UsergroupAddOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import { Layout, Menu, Button, theme } from "antd";
@@ -11,15 +10,40 @@ import { PiStudentLight } from "react-icons/pi";
 import { ImProfile } from "react-icons/im";
 import { Avatar } from "antd";
 import { GiTeacher } from "react-icons/gi";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 const { Header, Sider, Content } = Layout;
 const Sitebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(true);
   const herf = window.location.pathname;
   const [text, setText] = useState();
   const root = useNavigate();
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  //
+  const sitebar = [
+    {
+      title: "Teachers",
+      key: "/",
+      label: "Teachers",
+      icon: <GiTeacher />,
+    },
+    {
+      title: "Students",
+      key: "/students",
+      label: "Students",
+      icon: <PiStudentLight />,
+    },
+    {
+      title: "Profile",
+      key: "/profile",
+      label: "Profile",
+      icon: <ImProfile />,
+    },
+  ];
+
+  //
   useEffect(() => {
     if (herf == "/") {
       setText("Teachers");
@@ -43,29 +67,21 @@ const Sitebar = () => {
       setText("Edit Student");
     }
   }, [herf]);
-  const sitebar = [
-    {
-      title: "Teachers",
-      key: "/",
-      label: "Teachers",
-      icon: <GiTeacher />,
-    },
-    {
-      title: "Students",
-      key: "/students",
-      label: "Students",
-      icon: <PiStudentLight />,
-    },
-    {
-      title: "Profile",
-      key: "/profile",
-      label: "Profile",
-      icon: <ImProfile />,
-    },
-  ];
 
   return (
     <Layout>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <Sider className="home" trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <Menu
@@ -84,7 +100,6 @@ const Sitebar = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            paddingRight: "100px",
           }}
           className="header"
         >
@@ -101,7 +116,12 @@ const Sitebar = () => {
             />
             <h2>{text}</h2>
           </div>
-          <Avatar size={40} icon={<UserOutlined />} />
+          <Avatar
+            style={{ cursor: "pointer" }}
+            size={40}
+            icon={<UserOutlined />}
+            className="avatar"
+          />
         </Header>
         <Content>
           <Outlet />

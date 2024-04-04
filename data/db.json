@@ -23,9 +23,9 @@
     {
       "id": "1",
       "name": "Ja'farxon",
-      "group": "N45",
+      "group": "N44",
       "sur": "Saidumarov",
-      "level": "senior"
+      "level": "junior"
     },
     {
       "id": "2",
@@ -37,9 +37,9 @@
     {
       "id": "3",
       "name": "Ja'farxon",
-      "group": "N44",
+      "group": "N45",
       "sur": "Saidumarov",
-      "level": "junior"
+      "level": "senior"
     }
   ]
 }

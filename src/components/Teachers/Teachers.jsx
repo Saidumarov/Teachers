@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Container } from "@mui/material";
 import { Button } from "antd";
 import axios from "axios";
@@ -12,7 +10,7 @@ import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import "./index.scss";
 import { Input, Select } from "antd";
-import { Option } from "antd/es/mentions";
+
 export default function Teachers() {
   const navegate = useNavigate();
   const [data, setData] = useState([]);
@@ -50,17 +48,16 @@ export default function Teachers() {
 
   //
 
-  const handleChange = (event) => {
-    let value = event.target.value;
+  const handleChange = (value) => {
     setGrup(value);
+    console.log(value);
     let newperson = data1?.filter((el) => {
       return value === "all" ? el : el?.group === value;
     });
     setData(newperson);
   };
   //
-  const handleChange1 = (event) => {
-    let value = event.target.value;
+  const handleChange1 = (value) => {
     setLevel(value);
     let newperson = data1?.filter((el) => {
       return value === "all" ? el : el?.level === value;
@@ -113,17 +110,17 @@ export default function Teachers() {
           </div>
           <div className="filter_item">
             <Select placeholder="Group" value={grup} onChange={handleChange}>
-              <Option value="all">Group</Option>
-              <Option value="N45">N45</Option>
-              <Option value="N44">N44</Option>
+              <Select.Option value="all">Group</Select.Option>
+              <Select.Option value="N45">N45</Select.Option>
+              <Select.Option value="N44">N44</Select.Option>
             </Select>
           </div>
           <div className="filter_item" id="filter">
             <Select placeholder="Level" value={level} onChange={handleChange1}>
-              <Option value="all">Level</Option>
-              <Option value="senior">Senior</Option>
-              <Option value="middle">Middle</Option>
-              <Option value="junior">Junior</Option>
+              <Select.Option value="all">Level</Select.Option>
+              <Select.Option value="senior">Senior</Select.Option>
+              <Select.Option value="middle">Middle</Select.Option>
+              <Select.Option value="junior">Junior</Select.Option>
             </Select>
           </div>
           <Button

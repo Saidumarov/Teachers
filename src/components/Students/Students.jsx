@@ -46,7 +46,7 @@ export default function Students() {
 
   //
 
-  const handleChange = (event) => {
+  const handelChange = (event) => {
     let value = event.target.value;
     setGrup(value);
     let newperson = data1?.filter((el) => {
@@ -98,10 +98,16 @@ export default function Students() {
             />
           </div>
           <div className="filter_item">
-            <Select value={grup} placeholder="Group" onChange={handleChange}>
-              <Option value="all">Group</Option>
-              <Option value="N45">N45</Option>
-              <Option value="N44">N44</Option>
+            <Select
+              value={grup}
+              placeholder="Group"
+              onChange={(value) =>
+                handelChange({ target: { name: "group", value } })
+              }
+            >
+              <Select.Option value="all">Group</Select.Option>
+              <Select.Option value="N45">N45</Select.Option>
+              <Select.Option value="N44">N44</Select.Option>
             </Select>
           </div>
           <Button

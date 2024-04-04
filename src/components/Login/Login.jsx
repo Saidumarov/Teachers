@@ -70,7 +70,7 @@ const LoginPanel = ({ login }) => {
                 }}
               >
                 <Button type="primary" htmlType="submit">
-                  Submit
+                  Login
                 </Button>
               </Form.Item>
             </Form>

@@ -6,7 +6,6 @@ import { toast } from "react-toastify";
 import { Container } from "@mui/material";
 import { Button } from "antd";
 import { Input, Select } from "antd";
-import { Option } from "antd/es/mentions";
 
 const TeachersAdd = () => {
   const navegate = useNavigate();
@@ -37,13 +36,8 @@ const TeachersAdd = () => {
     });
   };
   const handelChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
+    console.log(e.target.name);
 
-  const handelChange1 = (e) => {
     setUser({
       ...user,
       [e.target.name]: e.target.value.trim(),
@@ -73,16 +67,28 @@ const TeachersAdd = () => {
             />
           </div>
           <div className="form">
-            <Select name="group" placeholder="Group" onChange={handelChange}>
-              <Option value="N45">N45</Option>
-              <Option value="N44">N44</Option>
+            <Select
+              name="group"
+              placeholder="Group"
+              onChange={(value) =>
+                handelChange({ target: { name: "group", value } })
+              }
+            >
+              <Select.Option value="N45">N45</Select.Option>
+              <Select.Option value="N44">N44</Select.Option>
             </Select>
           </div>
           <div className="form">
-            <Select placeholder="Level" onChange={handelChange}>
-              <Option value="senior">Senior</Option>
-              <Option value="middle">Middle</Option>
-              <Option value="junior">Junior</Option>
+            <Select
+              placeholder="Level"
+              name="level"
+              onChange={(value) =>
+                handelChange({ target: { name: "level", value } })
+              }
+            >
+              <Select.Option value="senior">Senior</Select.Option>
+              <Select.Option value="middle">Middle</Select.Option>
+              <Select.Option value="junior">Junior</Select.Option>
             </Select>
           </div>
         </div>
