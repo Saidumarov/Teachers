@@ -13,3 +13,28 @@ a {
 body {
   background-color: rgb(242, 242, 242);
 }
+
+.home {
+  height: 100vh;
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 20;
+}
+.header {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 20;
+}
+.flex {
+  display: flex;
+  align-items: center;
+}
+.flex h2 {
+  padding-left: 15px;
+}
+
+@media (min-width: 1600px) {
+  .home {
+    height: 100vh;
+  }
+}
