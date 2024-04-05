@@ -18,7 +18,7 @@ const StudentsAdd = () => {
 
   useEffect(() => {
     const fetchData = () => {
-      axios.get("http://localhost:3000/students").then((res) => {
+      axios.get("https://teachersapi.onrender.com/students").then((res) => {
         const user = res.data;
         setUsers(user);
       });
@@ -27,13 +27,17 @@ const StudentsAdd = () => {
   }, []);
 
   const add = async () => {
-    const newData = { ...user, id: users.length + 1 + "" };
-    await axios.post("http://localhost:3000/students", newData).then((res) => {
-      setUserData(res.data);
-      navegate("/students");
-      toast.success("Added Student Success");
-    });
+    const newData = { ...user };
+    await axios
+      .post("https://teachersapi.onrender.com/students", newData)
+      .then((res) => {
+        navegate("/students");
+        toast.success("Added Student Success");
+        setUserData(res.data);
+      });
   };
+
+  //
   const handelChange = (e) => {
     setUser({
       ...user,

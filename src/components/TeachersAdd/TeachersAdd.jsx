@@ -21,7 +21,7 @@ const TeachersAdd = () => {
 
   useEffect(() => {
     const fetchData = () => {
-      axios.get("http://localhost:3000/teachers").then((res) => {
+      axios.get("https://teachersapi.onrender.com/teachers").then((res) => {
         const user = res.data;
         setUsers(user);
       });
@@ -29,13 +29,17 @@ const TeachersAdd = () => {
     fetchData();
   }, []);
 
+  // id: users.length + 1
+
   const add = async () => {
-    const newData = { ...user, id: users.length + 1 + "" };
-    await axios.post("http://localhost:3000/teachers", newData).then((res) => {
-      setUserData(res.data);
-      navegate("/");
-      toast.success("Added Teacher Success");
-    });
+    const newData = { ...user };
+    await axios
+      .post("https://teachersapi.onrender.com/teachers", newData)
+      .then((res) => {
+        setUserData(res.data);
+        navegate("/");
+        toast.success("Added Teacher Success");
+      });
   };
   const handelChange = (e) => {
     console.log(e.target.name);

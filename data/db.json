@@ -1,22 +1,10 @@
 {
   "students": [
     {
-      "id": "1",
-      "name": "Ja'farxon",
-      "group": "N44",
-      "sur": "Saidumarov"
-    },
-    {
       "id": "2",
       "name": "Akmal",
       "group": "N44",
       "sur": "Diyorov"
-    },
-    {
-      "id": "3",
-      "name": "Ja'farxon",
-      "group": "N44",
-      "sur": "Saidumarov"
     },
     {
       "id": "4",
@@ -45,13 +33,6 @@
   ],
   "teachers": [
     {
-      "id": "1",
-      "name": "Ja'farxon",
-      "group": "N44",
-      "sur": "Saidumarov",
-      "level": "junior"
-    },
-    {
       "id": "2",
       "name": "Akmal",
       "group": "N44",
@@ -78,13 +59,6 @@
       "group": "N45",
       "sur": "Narzullayev",
       "level": "junior"
-    },
-    {
-      "id": "7",
-      "name": "Bobur",
-      "group": "N44",
-      "sur": "Bobomurodov",
-      "level": "middle"
     },
     {
       "id": "7",

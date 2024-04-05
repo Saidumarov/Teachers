@@ -11,7 +11,7 @@ import { GrPrevious } from "react-icons/gr";
 import "./index.scss";
 import { Input, Select } from "antd";
 import { Users } from "../../provider";
-
+import LoadingProduct from "../../loading";
 export default function Teachers() {
   const navegate = useNavigate();
   const [data, setData] = useState([]);
@@ -20,13 +20,15 @@ export default function Teachers() {
   const [level, setLevel] = useState();
   const [itemOffset, setItemOffset] = useState(0);
   const { userData, setUserData } = useContext(Users);
+  const [isloading, setIsLoading] = useState(true);
   const itemsPerPage = 5;
   //
   const fetchData = () => {
-    axios.get("http://localhost:3000/teachers").then((res) => {
+    axios.get("https://teachersapi.onrender.com/teachers").then((res) => {
       const data = res.data;
       setData(data);
       setData1(data);
+      setIsLoading(false);
     });
   };
 
@@ -68,7 +70,7 @@ export default function Teachers() {
   const deleteAdd = (id) => {
     if (window.confirm("Delete Teacher ?")) {
       axios
-        .delete(`http://localhost:3000/teachers/${id}`)
+        .delete(`https://teachersapi.onrender.com/teachers/${id}`)
         .then((res) => {
           toast.success("Delete Teacher Success ");
           fetchData();
@@ -96,6 +98,7 @@ export default function Teachers() {
   };
   return (
     <Container>
+      {isloading ? <LoadingProduct /> : null}
       <div className="container">
         <div className="filter">
           <div className="input">

@@ -22,7 +22,7 @@ const TeachersEdit = () => {
   useEffect(() => {
     const fetchData = () => {
       axios
-        .get(`http://localhost:3000/teachers/${id}`)
+        .get(`https://teachersapi.onrender.com/teachers/${id}`)
         .then((res) => {
           const user = res.data;
           setUser({
@@ -43,7 +43,7 @@ const TeachersEdit = () => {
   const editAdd = () => {
     navegate("/");
     axios
-      .put(`http://localhost:3000/teachers/${id}`, user)
+      .put(`https://teachersapi.onrender.com/teachers/${id}`, user)
       .then((res) => {
         toast.success("Edit Teacher Success ");
         setUserData(res.data);
