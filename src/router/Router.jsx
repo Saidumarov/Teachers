@@ -1,7 +1,6 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import Teachers from "../components/Teachers/Teachers";
 import Students from "../components/Students/Students";
-import Profile from "../components/Profile/Profile";
 import TeachersAdd from "../components/TeachersAdd/TeachersAdd";
 import TeachersEdit from "../components/TeachersEdit/TeachersEdit";
 import StudentsEdit from "../components/StudentsEdit/StudentsEdit";
@@ -9,6 +8,7 @@ import StudentsAdd from "../components/StudentsAdd/StudentsAdd";
 import LoginPanel from "../components/Login/Login";
 import { useEffect, useState } from "react";
 import Sitebar from "../components/SiteBar_and_Header";
+import Profile from "../components/Profile/Profile";
 
 const Router = () => {
   const [isLogin, setIsLogin] = useState(false);
@@ -28,6 +28,7 @@ const Router = () => {
       return navigation("/login");
     }
   }, [isLogin, parms]);
+
   return (
     <>
       <Routes>

@@ -12,12 +12,11 @@ import "./index.scss";
 import { Input, Select } from "antd";
 import { Users } from "../../provider";
 import LoadingProduct from "../../loading";
+import { useFormik } from "formik";
 export default function Teachers() {
   const navegate = useNavigate();
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
-  const [grup, setGrup] = useState();
-  const [level, setLevel] = useState();
   const [itemOffset, setItemOffset] = useState(0);
   const { userData, setUserData } = useContext(Users);
   const [isloading, setIsLoading] = useState(true);
@@ -49,23 +48,6 @@ export default function Teachers() {
     const newOffset = selectedPage * itemsPerPage;
     setItemOffset(newOffset);
   };
-  //
-
-  const handleChange = (value) => {
-    setGrup(value);
-    let newperson = data1?.filter((el) => {
-      return value === "all" ? el : el?.group === value;
-    });
-    setData(newperson);
-  };
-  //
-  const handleChange1 = (value) => {
-    setLevel(value);
-    let newperson = data1?.filter((el) => {
-      return value === "all" ? el : el?.level === value;
-    });
-    setData(newperson);
-  };
 
   const deleteAdd = (id) => {
     if (window.confirm("Delete Teacher ?")) {
@@ -85,17 +67,40 @@ export default function Teachers() {
     navegate(`/teachers/edit/${id}`);
   };
 
-  const search = (value) => {
-    let v = value.toLowerCase();
-    let search = data1?.filter((el) => {
-      return (
-        el?.name?.toLowerCase().includes(v) ||
-        el?.sur?.toLowerCase().includes(v) ||
-        el?.group?.toLowerCase().includes(v)
+  const { values, handleChange } = useFormik({
+    initialValues: {
+      search: "",
+      group: "all",
+      level: "all",
+    },
+  });
+
+  const { search, group, level } = values;
+
+  useEffect(() => {
+    let filteredData = data1;
+
+    if (search) {
+      const lowerSearch = search.toLowerCase();
+      filteredData = filteredData.filter(
+        (el) =>
+          el.name.toLowerCase().includes(lowerSearch) ||
+          el.sur.toLowerCase().includes(lowerSearch) ||
+          el.group.toLowerCase().includes(lowerSearch)
       );
-    });
-    setData(search);
-  };
+    }
+
+    if (group !== "all") {
+      filteredData = filteredData.filter((el) => el.group === group);
+    }
+
+    if (level !== "all") {
+      filteredData = filteredData.filter((el) => el.level === level);
+    }
+
+    setData(filteredData);
+  }, [search, group, level]);
+
   return (
     <Container>
       {isloading ? <LoadingProduct /> : null}
@@ -108,18 +113,33 @@ export default function Teachers() {
               variant="outlined"
               style={{ height: "50px" }}
               allowClear
-              onChange={(e) => search(e.target.value)}
+              name="search"
+              onChange={handleChange}
             />
           </div>
           <div className="filter_item">
-            <Select placeholder="Group" value={grup} onChange={handleChange}>
+            <Select
+              placeholder="Group"
+              value={group}
+              name="group"
+              onChange={(value) =>
+                handleChange({ target: { name: "group", value } })
+              }
+            >
               <Select.Option value="all">Group</Select.Option>
               <Select.Option value="N45">N45</Select.Option>
               <Select.Option value="N44">N44</Select.Option>
             </Select>
           </div>
           <div className="filter_item" id="filter">
-            <Select placeholder="Level" value={level} onChange={handleChange1}>
+            <Select
+              placeholder="Level"
+              value={level}
+              name="level"
+              onChange={(value) =>
+                handleChange({ target: { name: "level", value } })
+              }
+            >
               <Select.Option value="all">Level</Select.Option>
               <Select.Option value="senior">Senior</Select.Option>
               <Select.Option value="middle">Middle</Select.Option>

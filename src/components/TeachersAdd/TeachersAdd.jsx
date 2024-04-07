@@ -7,47 +7,31 @@ import { Container } from "@mui/material";
 import { Button } from "antd";
 import { Input, Select } from "antd";
 import { Users } from "../../provider";
+import { useFormik } from "formik";
 
 const TeachersAdd = () => {
   const navegate = useNavigate();
-  const [users, setUsers] = useState([]);
   const { userData, setUserData } = useContext(Users);
-  const [user, setUser] = useState({
-    name: "",
-    group: "",
-    sur: "",
-    level: "",
+
+  const { values, handleChange } = useFormik({
+    initialValues: {
+      name: "",
+      group: "",
+      sur: "",
+      level: "",
+    },
   });
 
-  useEffect(() => {
-    const fetchData = () => {
-      axios.get("https://teachersapi.onrender.com/teachers").then((res) => {
-        const user = res.data;
-        setUsers(user);
-      });
-    };
-    fetchData();
-  }, []);
-
-  // id: users.length + 1
+  const { name, group, sur, level } = values;
 
   const add = async () => {
-    const newData = { ...user };
     await axios
-      .post("https://teachersapi.onrender.com/teachers", newData)
+      .post("https://teachersapi.onrender.com/teachers", values)
       .then((res) => {
         setUserData(res.data);
         navegate("/");
         toast.success("Added Teacher Success");
       });
-  };
-  const handelChange = (e) => {
-    console.log(e.target.name);
-
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value.trim(),
-    });
   };
 
   return (
@@ -57,7 +41,7 @@ const TeachersAdd = () => {
           <div className="form">
             <Input
               type="name"
-              onChange={handelChange}
+              onChange={handleChange}
               placeholder="Firstname"
               id="name"
               name="name"
@@ -65,7 +49,7 @@ const TeachersAdd = () => {
           </div>
           <div className="form">
             <Input
-              onChange={handelChange}
+              onChange={handleChange}
               type="username"
               placeholder="Surname"
               id="sur"
@@ -77,7 +61,7 @@ const TeachersAdd = () => {
               name="group"
               placeholder="Group"
               onChange={(value) =>
-                handelChange({ target: { name: "group", value } })
+                handleChange({ target: { name: "group", value } })
               }
             >
               <Select.Option value="N45">N45</Select.Option>
@@ -89,7 +73,7 @@ const TeachersAdd = () => {
               placeholder="Level"
               name="level"
               onChange={(value) =>
-                handelChange({ target: { name: "level", value } })
+                handleChange({ target: { name: "level", value } })
               }
             >
               <Select.Option value="senior">Senior</Select.Option>
@@ -102,7 +86,7 @@ const TeachersAdd = () => {
           type="primary"
           className="save"
           onClick={add}
-          disabled={!user.name || !user.group || !user.sur || !user.level}
+          disabled={!name || !group || !sur || !level}
         >
           Save
         </Button>

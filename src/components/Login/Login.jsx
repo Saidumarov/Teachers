@@ -2,6 +2,8 @@ import { Button, Form, Input } from "antd";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FaUserLarge } from "react-icons/fa6";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 const LoginPanel = ({ login }) => {
   const navigation = useNavigate();
@@ -40,7 +42,7 @@ const LoginPanel = ({ login }) => {
               autoComplete="off"
             >
               <Form.Item
-                label="Username"
+                label={<FaUserLarge />}
                 name="username"
                 rules={[
                   {
@@ -52,7 +54,7 @@ const LoginPanel = ({ login }) => {
                 <Input />
               </Form.Item>
               <Form.Item
-                label="Password"
+                label={<RiLockPasswordLine />}
                 name="password"
                 rules={[
                   {

@@ -6,18 +6,23 @@ import { toast } from "react-toastify";
 import { Container } from "@mui/material";
 import { Button, Input, Select } from "antd";
 import { Users } from "../../provider";
+import { useFormik } from "formik";
 
 const TeachersEdit = () => {
   const navegate = useNavigate();
   const { id } = useParams();
   const { userData, setUserData } = useContext(Users);
-  const [user, setUser] = useState({
-    id: "",
-    name: "",
-    group: "",
-    sur: "",
-    level: "",
+
+  const { values, handleChange, setValues } = useFormik({
+    initialValues: {
+      name: "",
+      group: "",
+      sur: "",
+      level: "",
+    },
   });
+
+  const { name, group, sur, level } = values;
 
   useEffect(() => {
     const fetchData = () => {
@@ -25,7 +30,7 @@ const TeachersEdit = () => {
         .get(`https://teachersapi.onrender.com/teachers/${id}`)
         .then((res) => {
           const user = res.data;
-          setUser({
+          setValues({
             id: user.id,
             name: user.name,
             group: user.group,
@@ -43,7 +48,7 @@ const TeachersEdit = () => {
   const editAdd = () => {
     navegate("/");
     axios
-      .put(`https://teachersapi.onrender.com/teachers/${id}`, user)
+      .put(`https://teachersapi.onrender.com/teachers/${id}`, values)
       .then((res) => {
         toast.success("Edit Teacher Success ");
         setUserData(res.data);
@@ -53,13 +58,6 @@ const TeachersEdit = () => {
       });
   };
 
-  const handelChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
-
   return (
     <>
       <Container>
@@ -67,29 +65,29 @@ const TeachersEdit = () => {
           <div className="form">
             <Input
               type="name"
-              onChange={handelChange}
+              onChange={handleChange}
               placeholder="Firstname"
               id="name"
               name="name"
-              value={user.name}
+              value={name}
             />
           </div>
           <div className="form">
             <input
-              onChange={handelChange}
+              onChange={handleChange}
               type="username"
               placeholder="Surname"
               id="sur"
               name="sur"
-              value={user.sur}
+              value={sur}
             />
           </div>
           <div className="form">
             <Select
               name="group"
-              value={user.group}
+              value={group}
               onChange={(value) =>
-                handelChange({ target: { name: "group", value } })
+                handleChange({ target: { name: "group", value } })
               }
             >
               <Select.Option value="N45">N45</Select.Option>
@@ -99,9 +97,9 @@ const TeachersEdit = () => {
           <div className="form">
             <Select
               name="level"
-              value={user.level}
+              value={level}
               onChange={(value) =>
-                handelChange({ target: { name: "level", value } })
+                handleChange({ target: { name: "level", value } })
               }
             >
               <Select.Option value="senior">Senior</Select.Option>
@@ -114,7 +112,7 @@ const TeachersEdit = () => {
           type="primary"
           className="save"
           onClick={editAdd}
-          disabled={!user.name || !user.group || !user.sur || !user.level}
+          disabled={!name || !group || !sur || !level}
         >
           Update
         </Button>

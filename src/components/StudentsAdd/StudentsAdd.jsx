@@ -5,31 +5,26 @@ import { toast } from "react-toastify";
 import { Container } from "@mui/material";
 import { Button, Input, Select } from "antd";
 import { Users } from "../../provider";
+import { useFormik } from "formik";
 
 const StudentsAdd = () => {
   const navegate = useNavigate();
-  const [users, setUsers] = useState([]);
+
   const { userData, setUserData } = useContext(Users);
-  const [user, setUser] = useState({
-    name: "",
-    group: "",
-    sur: "",
+
+  const { values, handleChange } = useFormik({
+    initialValues: {
+      name: "",
+      group: "",
+      sur: "",
+    },
   });
 
-  useEffect(() => {
-    const fetchData = () => {
-      axios.get("https://teachersapi.onrender.com/students").then((res) => {
-        const user = res.data;
-        setUsers(user);
-      });
-    };
-    fetchData();
-  }, []);
+  const { name, group, sur } = values;
 
   const add = async () => {
-    const newData = { ...user };
     await axios
-      .post("https://teachersapi.onrender.com/students", newData)
+      .post("https://teachersapi.onrender.com/students", values)
       .then((res) => {
         navegate("/students");
         toast.success("Added Student Success");
@@ -38,13 +33,8 @@ const StudentsAdd = () => {
   };
 
   //
-  const handelChange = (e) => {
-    setUser({
-      ...user,
-      [e.target.name]: e.target.value.trim(),
-    });
-  };
 
+  console.log(values);
   return (
     <>
       <Container>
@@ -52,19 +42,19 @@ const StudentsAdd = () => {
           <div className="form">
             <Input
               type="name"
-              onChange={handelChange}
               placeholder="Firstname"
               id="name"
               name="name"
+              onChange={handleChange}
             />
           </div>
           <div className="form">
             <Input
-              onChange={handelChange}
               type="username"
               placeholder="Surname"
               id="sur"
               name="sur"
+              onChange={handleChange}
             />
           </div>
           <div className="form">
@@ -72,7 +62,7 @@ const StudentsAdd = () => {
               name="group"
               placeholder="Group"
               onChange={(value) =>
-                handelChange({ target: { name: "group", value } })
+                handleChange({ target: { name: "group", value } })
               }
             >
               <Select.Option value="N45">N45</Select.Option>
@@ -84,7 +74,7 @@ const StudentsAdd = () => {
           type="primary"
           className="save"
           onClick={add}
-          disabled={!user.name || !user.group || !user.sur}
+          disabled={!name || !group || !sur}
         >
           Save
         </Button>

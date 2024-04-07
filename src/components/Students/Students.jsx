@@ -10,6 +10,7 @@ import { GrPrevious } from "react-icons/gr";
 import { Button, Input, Select } from "antd";
 import { Users } from "../../provider";
 import LoadingProduct from "../../loading";
+import { useFormik } from "formik";
 export default function Students() {
   const navegate = useNavigate();
   const [data, setData] = useState([]);
@@ -77,17 +78,35 @@ export default function Students() {
     navegate(`/students/edit/${id}`);
   };
 
-  const search = (value) => {
-    let v = value.toLowerCase();
-    let search = data1?.filter((el) => {
-      return (
-        el?.name?.toLowerCase().includes(v) ||
-        el?.sur?.toLowerCase().includes(v) ||
-        el?.group?.toLowerCase().includes(v)
+  const { values, handleChange } = useFormik({
+    initialValues: {
+      search: "",
+      group: "all",
+    },
+  });
+
+  const { search, group } = values;
+
+  useEffect(() => {
+    let v = search && search.toLowerCase();
+    let filteredData = data1;
+
+    if (v) {
+      filteredData = filteredData.filter(
+        (el) =>
+          el.name.toLowerCase().includes(v) ||
+          el.sur.toLowerCase().includes(v) ||
+          el.group.toLowerCase().includes(v)
       );
-    });
-    setData(search);
-  };
+    }
+
+    if (group !== "all") {
+      filteredData = filteredData.filter((el) => el.group === group);
+    }
+
+    setData(filteredData);
+  }, [search, group]);
+
   return (
     <Container>
       {isloading ? <LoadingProduct /> : null}
@@ -100,15 +119,17 @@ export default function Students() {
               placeholder="Search..."
               style={{ height: "50px" }}
               allowClear
-              onChange={(e) => search(e.target.value)}
+              name="search"
+              onChange={handleChange}
             />
           </div>
           <div className="filter_item">
             <Select
-              value={grup}
+              value={group}
               placeholder="Group"
+              name="group"
               onChange={(value) =>
-                handelChange({ target: { name: "group", value } })
+                handleChange({ target: { name: "group", value } })
               }
             >
               <Select.Option value="all">Group</Select.Option>

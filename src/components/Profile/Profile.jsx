@@ -4,35 +4,34 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { Button, Input } from "antd";
+import { useFormik } from "formik";
 const Profile = () => {
   const [name, setName] = useState(false);
-  const [password, setpassword] = useState(false);
+  const [password1, setpassword] = useState(false);
   const navigation = useNavigate();
-  const [user, setUser] = useState({
-    username: "",
-    password: "",
+
+  const { values, handleChange, resetForm } = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+    },
   });
+
+  const { username, password } = values;
+
   const hendelSubmit = () => {
-    if (user.username && user.password) {
-      localStorage.setItem("user", JSON.stringify(user));
+    if (username && password) {
+      localStorage.setItem("user", JSON.stringify(values));
       toast.success("Updateed  user successfully");
-      setUser({
-        username: "",
-        password: "",
-      });
+      resetForm();
     } else {
-      if (user.username === "") {
+      if (username === "") {
         setName(true);
       }
-      if (user.password === "") {
+      if (password === "") {
         setpassword(true);
       }
     }
-  };
-  const hendelChange = (e) => {
-    setUser({ ...user, [e.target.name]: e.target.value.trim() });
-    setpassword(false);
-    setName(false);
   };
 
   const hendelLogaut = () => {
@@ -41,11 +40,12 @@ const Profile = () => {
   };
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
-    setUser({
-      username: user.username,
-      password: user.password,
-    });
+    if (user) {
+      handleChange({ target: { name: "username", value: user.username } });
+      handleChange({ target: { name: "password", value: user.password } });
+    }
   }, []);
+
   return (
     <div className="container">
       <div className="profil">
@@ -56,18 +56,18 @@ const Profile = () => {
             placeholder="Name"
             required
             name="username"
-            value={user.username}
+            value={username}
             className={`input ${name ? "active" : ""}`}
-            onChange={hendelChange}
+            onChange={handleChange}
           />
           <Input
             type="password"
             placeholder="Password"
             required
             name="password"
-            value={user.password}
-            onChange={hendelChange}
-            className={`input ${password ? "active" : ""}`}
+            value={password}
+            className={`input ${password1 ? "active" : ""}`}
+            onChange={handleChange}
           />
           <div className="btn">
             <Button type="primary" onClick={hendelSubmit}>
