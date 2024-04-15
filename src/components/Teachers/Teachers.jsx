@@ -12,42 +12,35 @@ import "./index.scss";
 import { Input, Select } from "antd";
 import { Users } from "../../provider";
 import LoadingProduct from "../../loading";
+import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
+import { fetchTeachers } from "../../redux/actions/teachersActions";
+
 export default function Teachers() {
   const navegate = useNavigate();
   const [data, setData] = useState([]);
-  const [data1, setData1] = useState([]);
   const [itemOffset, setItemOffset] = useState(0);
-  const { userData, setUserData } = useContext(Users);
-  const [isloading, setIsLoading] = useState(true);
+  const { userData } = useContext(Users);
   const itemsPerPage = 5;
-  //
-  const fetchData = () => {
-    axios.get("https://teachersapi.onrender.com/teachers").then((res) => {
-      const data = res.data;
-      setData(data);
-      setData1(data);
-      setIsLoading(false);
-    });
-  };
 
-  //
+  const { teachers, loading } = useSelector((state) => state.teachers);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchData();
-  }, [userData]);
-
-  //
+    dispatch(fetchTeachers());
+  }, [dispatch, userData]);
 
   // pagenation function
   const startOffset = itemOffset;
   const endOffset = itemOffset + itemsPerPage;
-  const currentItems = data?.slice(startOffset, endOffset);
-  const pageCount = Math.ceil(data?.length / itemsPerPage);
-
+  const currentItems = teachers?.slice(startOffset, endOffset);
+  const pageCount = Math.ceil(teachers?.length / itemsPerPage);
   const handlePageClick = (selectedPage) => {
     const newOffset = selectedPage * itemsPerPage;
     setItemOffset(newOffset);
   };
+
+  // Delete the teacher
 
   const deleteAdd = (id) => {
     if (window.confirm("Delete Teacher ?")) {
@@ -63,10 +56,12 @@ export default function Teachers() {
     }
   };
 
+  //  Edit the teacher
   const edit = (id) => {
     navegate(`/teachers/edit/${id}`);
   };
 
+  //  Filter functions
   const { values, handleChange } = useFormik({
     initialValues: {
       search: "",
@@ -78,7 +73,7 @@ export default function Teachers() {
   const { search, group, level } = values;
 
   useEffect(() => {
-    let filteredData = data1;
+    let filteredData = teachers;
 
     if (search) {
       const lowerSearch = search.toLowerCase();
@@ -99,11 +94,10 @@ export default function Teachers() {
     }
 
     setData(filteredData);
-  }, [search, group, level]);
-
+  }, [search, group, level, data]);
   return (
     <Container>
-      {isloading ? <LoadingProduct /> : null}
+      {loading ? <LoadingProduct /> : null}
       <div className="container">
         <div className="filter">
           <div className="input">
