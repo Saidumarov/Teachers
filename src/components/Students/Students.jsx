@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import Edit, { Delete } from "../../constants";
@@ -12,9 +12,11 @@ import LoadingProduct from "../../loading";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchStudents } from "../../redux/actions/studentsActions";
+import { Users } from "../../provider";
 export default function Students() {
   const navegate = useNavigate();
   const dispatch = useDispatch();
+  const { userData } = useContext(Users);
   const { students, loading, error } = useSelector((state) => state.students);
   const [data, setData] = useState([]);
   const [itemOffset, setItemOffset] = useState(0);
@@ -35,7 +37,7 @@ export default function Students() {
   const deleteAdd = (id) => {
     if (window.confirm("Delete Student ")) {
       axios
-        .delete(`http://localhost:3000/students/${id}`)
+        .delete(`https://teachersapi.onrender.com/students/${id}`)
         .then((res) => {
           toast.success("Delete Student Success ");
           dispatch(fetchStudents());
@@ -63,7 +65,7 @@ export default function Students() {
 
   useEffect(() => {
     let v = search && search.toLowerCase();
-    let filteredData = data;
+    let filteredData = students;
 
     if (v) {
       filteredData = filteredData.filter(
@@ -84,7 +86,7 @@ export default function Students() {
   // fetch data
   useEffect(() => {
     dispatch(fetchStudents());
-  }, [dispatch]);
+  }, [dispatch, userData]);
 
   useEffect(() => {
     if (students.length > 0) {

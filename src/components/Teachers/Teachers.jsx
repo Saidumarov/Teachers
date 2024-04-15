@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import { Button } from "antd";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import Edit, { Delete } from "../../constants";
@@ -14,12 +14,14 @@ import LoadingProduct from "../../loading";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
 import { fetchTeachers } from "../../redux/actions/teachersActions";
+import { Users } from "../../provider";
 
 export default function Teachers() {
   const navegate = useNavigate();
   const { teachers, loading, error } = useSelector((state) => state.teachers);
   const dispatch = useDispatch();
   const [data, setData] = useState([]);
+  const { userData } = useContext(Users);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 5;
 
@@ -37,7 +39,7 @@ export default function Teachers() {
   const deleteAdd = (id) => {
     if (window.confirm("Delete Teacher ?")) {
       axios
-        .delete(`http://localhost:3000/teachers/${id}`)
+        .delete(`https://teachersapi.onrender.com/teachers/${id}`)
         .then((res) => {
           toast.success("Delete Teacher Success ");
           dispatch(fetchTeachers());
@@ -91,7 +93,7 @@ export default function Teachers() {
   // fetch data
   useEffect(() => {
     dispatch(fetchTeachers());
-  }, [dispatch]);
+  }, [dispatch, userData]);
 
   useEffect(() => {
     if (teachers.length > 0) {

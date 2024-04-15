@@ -18,7 +18,7 @@ const studentsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        teachers: action.payload,
+        students: action.payload,
       };
     case "FETCH_STUDENTS_FAILURE":
       return {

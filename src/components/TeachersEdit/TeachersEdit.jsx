@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./index.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -6,10 +6,13 @@ import { toast } from "react-toastify";
 import { Container } from "@mui/material";
 import { Button, Input, Select } from "antd";
 import { useFormik } from "formik";
+import { Users } from "../../provider";
 
 const TeachersEdit = () => {
   const navegate = useNavigate();
   const { id } = useParams();
+
+  const { setUserData } = useContext(Users);
 
   const { values, handleChange, setValues } = useFormik({
     initialValues: {
@@ -49,6 +52,7 @@ const TeachersEdit = () => {
       .put(`https://teachersapi.onrender.com/teachers/${id}`, values)
       .then((res) => {
         toast.success("Edit Teacher Success ");
+        setUserData(res.data);
       })
       .catch((err) => {
         console.log(err);

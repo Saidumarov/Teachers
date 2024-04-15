@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./index.scss";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -7,9 +7,11 @@ import { Container } from "@mui/material";
 import { Button } from "antd";
 import { Input, Select } from "antd";
 import { useFormik } from "formik";
+import { Users } from "../../provider";
 
 const TeachersAdd = () => {
   const navegate = useNavigate();
+  const { setUserData } = useContext(Users);
 
   const { values, handleChange } = useFormik({
     initialValues: {
@@ -28,6 +30,7 @@ const TeachersAdd = () => {
       .then((res) => {
         navegate("/");
         toast.success("Added Teacher Success");
+        setUserData(res.data);
       });
   };
 
