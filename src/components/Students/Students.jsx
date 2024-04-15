@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import Edit, { Delete } from "../../constants";
@@ -8,14 +8,12 @@ import { toast } from "react-toastify";
 import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import { Button, Input, Select } from "antd";
-import { Users } from "../../provider";
 import LoadingProduct from "../../loading";
 import { useFormik } from "formik";
 export default function Students() {
   const navegate = useNavigate();
   const [data, setData] = useState([]);
   const [data1, setData1] = useState([]);
-  const { userData, setUserData } = useContext(Users);
   const [grup, setGrup] = useState();
   const [itemOffset, setItemOffset] = useState(0);
   const [isloading, setIsLoading] = useState(true);
@@ -34,7 +32,7 @@ export default function Students() {
 
   useEffect(() => {
     fetchData();
-  }, [userData]);
+  }, []);
 
   //
 
@@ -50,15 +48,6 @@ export default function Students() {
   };
 
   //
-
-  const handelChange = (event) => {
-    let value = event.target.value;
-    setGrup(value);
-    let newperson = data1?.filter((el) => {
-      return value === "all" ? el : el?.group === value;
-    });
-    setData(newperson);
-  };
 
   const deleteAdd = (id) => {
     if (window.confirm("Delete Student ")) {

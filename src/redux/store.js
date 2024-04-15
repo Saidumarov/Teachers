@@ -1,7 +1,7 @@
 import { createStore, combineReducers, applyMiddleware } from "redux";
-import { thunk } from "redux-thunk"; // agar asinxron action lar qo'llanilsa
+import { thunk } from "redux-thunk";
 
-import teachersReducer from "./reducers/teachersReducer"; // Yukoridagi reducer(lar)
+import teachersReducer from "./reducers/teachersReducer";
 const rootReducer = combineReducers({
   teachers: teachersReducer,
 });

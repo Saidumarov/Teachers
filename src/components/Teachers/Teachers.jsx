@@ -1,7 +1,7 @@
 import { Container } from "@mui/material";
 import { Button } from "antd";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
 import Edit, { Delete } from "../../constants";
@@ -10,7 +10,6 @@ import { GrNext } from "react-icons/gr";
 import { GrPrevious } from "react-icons/gr";
 import "./index.scss";
 import { Input, Select } from "antd";
-import { Users } from "../../provider";
 import LoadingProduct from "../../loading";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
@@ -20,28 +19,22 @@ export default function Teachers() {
   const navegate = useNavigate();
   const [data, setData] = useState([]);
   const [itemOffset, setItemOffset] = useState(0);
-  const { userData } = useContext(Users);
+
   const itemsPerPage = 5;
 
-  const { teachers, loading } = useSelector((state) => state.teachers);
+  const { teachers, loading, error } = useSelector((state) => state.teachers);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchTeachers());
-  }, [dispatch, userData]);
-
   // pagenation function
   const startOffset = itemOffset;
   const endOffset = itemOffset + itemsPerPage;
-  const currentItems = teachers?.slice(startOffset, endOffset);
-  const pageCount = Math.ceil(teachers?.length / itemsPerPage);
+  const currentItems = data?.slice(startOffset, endOffset);
+  const pageCount = Math.ceil(data?.length / itemsPerPage);
   const handlePageClick = (selectedPage) => {
     const newOffset = selectedPage * itemsPerPage;
     setItemOffset(newOffset);
   };
 
   // Delete the teacher
-
   const deleteAdd = (id) => {
     if (window.confirm("Delete Teacher ?")) {
       axios
@@ -94,7 +87,13 @@ export default function Teachers() {
     }
 
     setData(filteredData);
-  }, [search, group, level, data]);
+  }, [search, group, level]);
+
+  // fetch data
+  useEffect(() => {
+    dispatch(fetchTeachers(), setData(teachers));
+  }, [dispatch]);
+
   return (
     <Container>
       {loading ? <LoadingProduct /> : null}
