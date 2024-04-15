@@ -17,13 +17,12 @@ import { fetchTeachers } from "../../redux/actions/teachersActions";
 
 export default function Teachers() {
   const navegate = useNavigate();
-  const [data, setData] = useState([]);
-  const [itemOffset, setItemOffset] = useState(0);
-
-  const itemsPerPage = 5;
-
   const { teachers, loading, error } = useSelector((state) => state.teachers);
   const dispatch = useDispatch();
+  const [data, setData] = useState([]);
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 5;
+
   // pagenation function
   const startOffset = itemOffset;
   const endOffset = itemOffset + itemsPerPage;
@@ -38,10 +37,10 @@ export default function Teachers() {
   const deleteAdd = (id) => {
     if (window.confirm("Delete Teacher ?")) {
       axios
-        .delete(`https://teachersapi.onrender.com/teachers/${id}`)
+        .delete(`http://localhost:3000/teachers/${id}`)
         .then((res) => {
           toast.success("Delete Teacher Success ");
-          fetchData();
+          dispatch(fetchTeachers());
         })
         .catch((err) => {
           console.log(err);
@@ -91,9 +90,14 @@ export default function Teachers() {
 
   // fetch data
   useEffect(() => {
-    dispatch(fetchTeachers(), setData(teachers));
+    dispatch(fetchTeachers());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (teachers.length > 0) {
+      setData(teachers);
+    }
+  }, [teachers]);
   return (
     <Container>
       {loading ? <LoadingProduct /> : null}

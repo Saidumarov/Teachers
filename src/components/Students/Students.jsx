@@ -10,31 +10,15 @@ import { GrPrevious } from "react-icons/gr";
 import { Button, Input, Select } from "antd";
 import LoadingProduct from "../../loading";
 import { useFormik } from "formik";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchStudents } from "../../redux/actions/studentsActions";
 export default function Students() {
   const navegate = useNavigate();
+  const dispatch = useDispatch();
+  const { students, loading, error } = useSelector((state) => state.students);
   const [data, setData] = useState([]);
-  const [data1, setData1] = useState([]);
-  const [grup, setGrup] = useState();
   const [itemOffset, setItemOffset] = useState(0);
-  const [isloading, setIsLoading] = useState(true);
   const itemsPerPage = 5;
-  //
-  const fetchData = () => {
-    axios.get("https://teachersapi.onrender.com/students").then((res) => {
-      const data = res.data;
-      setData(data);
-      setData1(data);
-      setIsLoading(false);
-    });
-  };
-
-  //
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  //
 
   // pagenation function
   const startOffset = itemOffset;
@@ -47,15 +31,14 @@ export default function Students() {
     setItemOffset(newOffset);
   };
 
-  //
-
+  //  Delete the Student
   const deleteAdd = (id) => {
     if (window.confirm("Delete Student ")) {
       axios
-        .delete(`https://teachersapi.onrender.com/students/${id}`)
+        .delete(`http://localhost:3000/students/${id}`)
         .then((res) => {
           toast.success("Delete Student Success ");
-          fetchData();
+          dispatch(fetchStudents());
         })
         .catch((err) => {
           console.log(err);
@@ -63,10 +46,12 @@ export default function Students() {
     }
   };
 
+  //  Edit the Student
   const edit = (id) => {
     navegate(`/students/edit/${id}`);
   };
 
+  //  Filter functions
   const { values, handleChange } = useFormik({
     initialValues: {
       search: "",
@@ -78,7 +63,7 @@ export default function Students() {
 
   useEffect(() => {
     let v = search && search.toLowerCase();
-    let filteredData = data1;
+    let filteredData = data;
 
     if (v) {
       filteredData = filteredData.filter(
@@ -96,9 +81,20 @@ export default function Students() {
     setData(filteredData);
   }, [search, group]);
 
+  // fetch data
+  useEffect(() => {
+    dispatch(fetchStudents());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (students.length > 0) {
+      setData(students);
+    }
+  }, [students]);
+
   return (
     <Container>
-      {isloading ? <LoadingProduct /> : null}
+      {loading ? <LoadingProduct /> : null}
 
       <div className="container">
         <div className="filter">
