@@ -1,132 +1,109 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import "./index.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Container } from "@mui/material";
 import { Button, Input, Select } from "antd";
-import { useFormik } from "formik";
+import { useForm } from "react-hook-form";
 import { Users } from "../../provider";
 
 const TeachersEdit = () => {
-  const navegate = useNavigate();
+  const navigate = useNavigate();
   const { id } = useParams();
-
   const { setUserData } = useContext(Users);
 
-  const { values, handleChange, setValues } = useFormik({
-    initialValues: {
-      name: "",
-      group: "",
-      sur: "",
-      level: "",
-    },
-  });
-
-  const { name, group, sur, level } = values;
+  const { handleSubmit, setValue, register } = useForm();
 
   useEffect(() => {
-    const fetchData = () => {
-      axios
-        .get(`https://teachersapi.onrender.com/teachers/${id}`)
-        .then((res) => {
-          const user = res.data;
-          setValues({
-            id: user.id,
-            name: user.name,
-            group: user.group,
-            sur: user.sur,
-            level: user.level,
-          });
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/teachers/${id}`
+        );
+        const { name, group, sur, level } = response.data;
+        setUserData(response.data);
+        setValue("name", name);
+        setValue("group", group);
+        setValue("sur", sur);
+        setValue("level", level);
+        setValue("id", id);
+      } catch (error) {
+        console.error("Error fetching teacher:", error);
+      }
     };
     fetchData();
-  }, [id]);
+  }, [id, setValue]);
 
-  const editAdd = () => {
-    navegate("/");
-    axios
-      .put(`https://teachersapi.onrender.com/teachers/${id}`, values)
-      .then((res) => {
-        toast.success("Edit Teacher Success ");
-        setUserData(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const onSubmit = async (data) => {
+    try {
+      await axios
+        .put(`http://localhost:3000/teachers/${id}`, data)
+        .then((res) => {
+          setUserData(res.data);
+        });
+      toast.success("Edit Teacher Success ");
+      navigate("/");
+    } catch (error) {
+      console.error("Error editing teacher:", error);
+    }
   };
 
   return (
-    <>
-      <Container>
+    <Container>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="add">
           <div className="form">
-            <Input
-              type="name"
-              onChange={handleChange}
+            <input
+              type="text"
               placeholder="Firstname"
-              id="name"
               name="name"
-              value={name}
+              {...register("name", { required: true })}
             />
           </div>
           <div className="form">
             <input
-              onChange={handleChange}
-              type="username"
+              type="text"
               placeholder="Surname"
-              id="sur"
               name="sur"
-              value={sur}
+              {...register("sur", { required: true })}
             />
           </div>
           <div className="form">
-            <Select
+            <select
+              placeholder="Group"
               name="group"
-              value={group}
-              onChange={(value) =>
-                handleChange({ target: { name: "group", value } })
-              }
+              {...register("group", { required: true })}
             >
-              <Select.Option value="N45">N45</Select.Option>
-              <Select.Option value="N44">N44</Select.Option>
-            </Select>
+              <option value="N45">N45</option>
+              <option value="N44">N44</option>
+            </select>
           </div>
           <div className="form">
-            <Select
+            <select
+              placeholder="Level"
               name="level"
-              value={level}
-              onChange={(value) =>
-                handleChange({ target: { name: "level", value } })
-              }
+              {...register("level", { required: true })}
             >
-              <Select.Option value="senior">Senior</Select.Option>
-              <Select.Option value="middle">Middle</Select.Option>
-              <Select.Option value="junior">Junior</Select.Option>
-            </Select>
+              <option value="senior">Senior</option>
+              <option value="middle">Middle</option>
+              <option value="junior">Junior</option>
+            </select>
           </div>
         </div>
-        <Button
-          type="primary"
-          className="save"
-          onClick={editAdd}
-          disabled={!name || !group || !sur || !level}
-        >
+        <Button type="primary" className="save" htmlType="submit">
           Update
         </Button>
         <Button
           type="primary"
           danger
           className="save"
-          onClick={() => navegate("/")}
+          onClick={() => navigate("/")}
         >
           Close
         </Button>
-      </Container>
-    </>
+      </form>
+    </Container>
   );
 };
 

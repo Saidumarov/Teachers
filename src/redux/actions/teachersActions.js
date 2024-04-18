@@ -24,7 +24,7 @@ export const fetchTeachers = () => {
   return (dispatch) => {
     dispatch(fetchTeachersRequest());
     axios
-      .get("https://teachersapi.onrender.com/teachers")
+      .get("http://localhost:3000/teachers")
       .then((response) => {
         const teachers = response.data;
         dispatch(fetchTeachersSuccess(teachers));

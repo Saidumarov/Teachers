@@ -1,6 +1,12 @@
 {
   "students": [
     {
+      "id": "1",
+      "name": "Ja'farxon",
+      "group": "N45",
+      "sur": "Saidumarov"
+    },
+    {
       "id": "2",
       "name": "Akmal",
       "group": "N44",
@@ -17,9 +23,34 @@
       "name": "Ja'farxon",
       "group": "N45",
       "sur": "Saidumarov"
+    },
+    {
+      "id": "6",
+      "name": "Azim",
+      "group": "N45",
+      "sur": "Narzullayev"
+    },
+    {
+      "id": "7",
+      "name": "Bobur",
+      "group": "N44",
+      "sur": "Bobomurodov"
+    },
+    {
+      "id": "c149",
+      "name": "ddddddd",
+      "sur": "ddd",
+      "group": "N44"
     }
   ],
   "teachers": [
+    {
+      "id": "1",
+      "name": "Alisher",
+      "group": "N45",
+      "sur": "Bobomurodov",
+      "level": "middle"
+    },
     {
       "id": "2",
       "name": "Akmal",
@@ -47,6 +78,27 @@
       "group": "N45",
       "sur": "Narzullayev",
       "level": "junior"
+    },
+    {
+      "id": "7",
+      "name": "Ja'farxon",
+      "group": "N44",
+      "sur": "Saidumarov",
+      "level": "middle"
+    },
+    {
+      "id": "52e6",
+      "name": "dfsadasd",
+      "sur": "asdsa",
+      "group": "N44",
+      "level": "middle"
+    },
+    {
+      "id": "8551",
+      "name": "dasdas",
+      "sur": "dasdasd",
+      "group": "N44",
+      "level": "senior"
     }
   ]
 }

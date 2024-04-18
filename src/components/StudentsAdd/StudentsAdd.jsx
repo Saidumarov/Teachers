@@ -1,89 +1,77 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Container } from "@mui/material";
 import { Button, Input, Select } from "antd";
-import { useFormik } from "formik";
 import { Users } from "../../provider";
+import { useForm } from "react-hook-form";
 
 const StudentsAdd = () => {
-  const navegate = useNavigate();
+  const navigate = useNavigate();
   const { setUserData } = useContext(Users);
+  const { handleSubmit, setValue, getValues } = useForm();
 
-  const { values, handleChange } = useFormik({
-    initialValues: {
-      name: "",
-      group: "",
-      sur: "",
-    },
-  });
-
-  const { name, group, sur } = values;
-
-  const add = async () => {
-    await axios
-      .post("https://teachersapi.onrender.com/students", values)
-      .then((res) => {
-        navegate("/students");
-        toast.success("Added Student Success");
+  // Form submission handler
+  const onSubmit = async () => {
+    const data = getValues();
+    try {
+      await axios.post("http://localhost:3000/students", data).then((res) => {
         setUserData(res.data);
       });
+      toast.success("Added Student Success");
+      navigate("/students");
+    } catch (error) {
+      console.error("Error adding student:", error);
+    }
   };
-
-  //
 
   return (
     <>
       <Container>
-        <div className="add">
-          <div className="form">
-            <Input
-              type="name"
-              placeholder="Firstname"
-              id="name"
-              name="name"
-              onChange={handleChange}
-            />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="add">
+            <div className="form">
+              <Input
+                type="text"
+                onChange={(e) => setValue("name", e.target.value)}
+                placeholder="Firstname"
+                name="name"
+                required
+              />
+            </div>
+            <div className="form">
+              <Input
+                type="text"
+                onChange={(e) => setValue("sur", e.target.value)}
+                placeholder="Surname"
+                name="sur"
+                required
+              />
+            </div>
+            <div className="form">
+              <Select
+                name="group"
+                placeholder="Group"
+                onChange={(value) => setValue("group", value)}
+              >
+                <Select.Option value="N45">N45</Select.Option>
+                <Select.Option value="N44">N44</Select.Option>
+              </Select>
+            </div>
           </div>
-          <div className="form">
-            <Input
-              type="username"
-              placeholder="Surname"
-              id="sur"
-              name="sur"
-              onChange={handleChange}
-            />
-          </div>
-          <div className="form">
-            <Select
-              name="group"
-              placeholder="Group"
-              onChange={(value) =>
-                handleChange({ target: { name: "group", value } })
-              }
-            >
-              <Select.Option value="N45">N45</Select.Option>
-              <Select.Option value="N44">N44</Select.Option>
-            </Select>
-          </div>
-        </div>
-        <Button
-          type="primary"
-          className="save"
-          onClick={add}
-          disabled={!name || !group || !sur}
-        >
-          Save
-        </Button>
-        <Button
-          type="primary"
-          danger
-          className="save"
-          onClick={() => navegate("/students")}
-        >
-          Close
-        </Button>
+          <Button type="primary" className="save" htmlType="submit">
+            Save
+          </Button>
+          <Button
+            type="primary"
+            danger
+            className="save"
+            onClick={() => navigate("/students")}
+          >
+            Close
+          </Button>
+        </form>
       </Container>
     </>
   );

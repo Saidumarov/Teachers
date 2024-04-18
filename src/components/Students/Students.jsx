@@ -37,7 +37,7 @@ export default function Students() {
   const deleteAdd = (id) => {
     if (window.confirm("Delete Student ")) {
       axios
-        .delete(`https://teachersapi.onrender.com/students/${id}`)
+        .delete(`http://localhost:3000/students/${id}`)
         .then((res) => {
           toast.success("Delete Student Success ");
           dispatch(fetchStudents());

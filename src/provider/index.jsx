@@ -1,4 +1,3 @@
-"use client";
 import React, { createContext } from "react";
 import { useState } from "react";
 export const Users = createContext();
@@ -6,7 +5,7 @@ function DataProvider({ children }) {
   const [userData, setUserData] = useState();
 
   return (
-    <div>
+    <>
       <Users.Provider
         value={{
           userData,
@@ -15,7 +14,7 @@ function DataProvider({ children }) {
       >
         {children}
       </Users.Provider>
-    </div>
+    </>
   );
 }
 

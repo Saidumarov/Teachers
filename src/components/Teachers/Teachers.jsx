@@ -39,7 +39,7 @@ export default function Teachers() {
   const deleteAdd = (id) => {
     if (window.confirm("Delete Teacher ?")) {
       axios
-        .delete(`https://teachersapi.onrender.com/teachers/${id}`)
+        .delete(`http://localhost:3000/teachers/${id}`)
         .then((res) => {
           toast.success("Delete Teacher Success ");
           dispatch(fetchTeachers());

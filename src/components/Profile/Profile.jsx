@@ -1,5 +1,5 @@
 import "./index.scss";
-import userpn from "../../assets/2.jpg";
+import userpn from "../../assets/User-avatar.svg.png";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
