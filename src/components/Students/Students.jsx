@@ -1,5 +1,4 @@
 import { Container } from "@mui/material";
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +10,8 @@ import { Button, Input, Select } from "antd";
 import LoadingProduct from "../../loading";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchStudents } from "../../redux/actions/studentsActions";
 import { Users } from "../../provider";
+import { deleteStudent, fetchStudents } from "../../app/studentSlice";
 export default function Students() {
   const navegate = useNavigate();
   const dispatch = useDispatch();
@@ -34,17 +33,10 @@ export default function Students() {
   };
 
   //  Delete the Student
-  const deleteAdd = (id) => {
-    if (window.confirm("Delete Student ")) {
-      axios
-        .delete(`http://localhost:3000/students/${id}`)
-        .then((res) => {
-          toast.success("Delete Student Success ");
-          dispatch(fetchStudents());
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+  const handleDelete = (id) => {
+    if (window.confirm("Delete Student? ")) {
+      dispatch(deleteStudent(id));
+      toast.success("Delete Student Success ");
     }
   };
 
@@ -161,7 +153,7 @@ export default function Students() {
                     type="primary"
                     danger
                     className="delete"
-                    onClick={() => deleteAdd(el?.id)}
+                    onClick={() => handleDelete(el?.id)}
                   >
                     <Delete />
                   </Button>

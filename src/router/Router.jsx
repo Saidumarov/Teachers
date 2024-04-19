@@ -16,7 +16,7 @@ const Router = () => {
   const parms = window.location.href;
   // login
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("users"));
     if (user) {
       setIsLogin(true);
       if (parms.includes("/login")) {

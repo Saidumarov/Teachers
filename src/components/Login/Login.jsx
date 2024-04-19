@@ -9,7 +9,7 @@ const LoginPanel = ({ login }) => {
   const navigation = useNavigate();
 
   const onFinish = (values) => {
-    localStorage.setItem("user", JSON.stringify(values));
+    localStorage.setItem("users", JSON.stringify(values));
     toast.success("User saved successfully");
     navigation("/");
     login(true);

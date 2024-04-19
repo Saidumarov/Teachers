@@ -21,7 +21,7 @@ const Profile = () => {
 
   const hendelSubmit = () => {
     if (username && password) {
-      localStorage.setItem("user", JSON.stringify(values));
+      localStorage.setItem("users", JSON.stringify(values));
       toast.success("Updateed  user successfully");
       resetForm();
     } else {
@@ -39,7 +39,7 @@ const Profile = () => {
     navigation("/");
   };
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const user = JSON.parse(localStorage.getItem("users"));
     if (user) {
       handleChange({ target: { name: "username", value: user.username } });
       handleChange({ target: { name: "password", value: user.password } });

@@ -1,6 +1,5 @@
 import { Container } from "@mui/material";
 import { Button } from "antd";
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import ReactPaginate from "react-paginate";
 import { useNavigate } from "react-router-dom";
@@ -13,15 +12,15 @@ import { Input, Select } from "antd";
 import LoadingProduct from "../../loading";
 import { useSelector, useDispatch } from "react-redux";
 import { useFormik } from "formik";
-import { fetchTeachers } from "../../redux/actions/teachersActions";
+import { fetchTeachers, deleteTeacher } from "../../app/teachersSlice";
 import { Users } from "../../provider";
 
 export default function Teachers() {
   const navegate = useNavigate();
   const { teachers, loading, error } = useSelector((state) => state.teachers);
   const dispatch = useDispatch();
-  const [data, setData] = useState([]);
   const { userData } = useContext(Users);
+  const [data, setData] = useState([]);
   const [itemOffset, setItemOffset] = useState(0);
   const itemsPerPage = 5;
 
@@ -36,17 +35,10 @@ export default function Teachers() {
   };
 
   // Delete the teacher
-  const deleteAdd = (id) => {
+  const handleDelete = (id) => {
     if (window.confirm("Delete Teacher ?")) {
-      axios
-        .delete(`http://localhost:3000/teachers/${id}`)
-        .then((res) => {
-          toast.success("Delete Teacher Success ");
-          dispatch(fetchTeachers());
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      dispatch(deleteTeacher(id));
+      toast.success("Delete Teacher Success ");
     }
   };
 
@@ -184,7 +176,7 @@ export default function Teachers() {
                     type="primary"
                     danger
                     className="delete"
-                    onClick={() => deleteAdd(el?.id)}
+                    onClick={() => handleDelete(el?.id)}
                   >
                     <Delete />
                   </Button>
