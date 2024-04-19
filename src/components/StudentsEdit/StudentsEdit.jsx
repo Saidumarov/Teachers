@@ -17,7 +17,7 @@ const StudentsEdit = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/students/${id}`
+          `https://teachersapi.onrender.com/students/${id}`
         );
         const { name, group, sur } = response.data;
         setUserData(response.data);
@@ -35,7 +35,7 @@ const StudentsEdit = () => {
   const onSubmit = async (data) => {
     try {
       await axios
-        .put(`http://localhost:3000/students/${id}`, data)
+        .put(`https://teachersapi.onrender.com/students/${id}`, data)
         .then((res) => {
           setUserData(res.data);
         });

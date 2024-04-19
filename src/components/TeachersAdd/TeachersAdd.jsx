@@ -17,9 +17,11 @@ const TeachersAdd = () => {
   const onSubmit = async () => {
     const data = getValues();
     try {
-      await axios.post("http://localhost:3000/teachers", data).then((res) => {
-        setUserData(res.data);
-      });
+      await axios
+        .post("https://teachersapi.onrender.com/teachers", data)
+        .then((res) => {
+          setUserData(res.data);
+        });
       toast.success("Added Teacher Success");
       navigate("/");
     } catch (error) {

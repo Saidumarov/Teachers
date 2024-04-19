@@ -11,7 +11,7 @@ export const fetchTeachers = createAsyncThunk(
   "teachers/fetchTeachers",
   async () => {
     try {
-      const res = await axios.get("http://localhost:3000/teachers");
+      const res = await axios.get("https://teachersapi.onrender.com/teachers");
       const data = await res.data;
       return data;
     } catch (error) {
@@ -24,7 +24,9 @@ export const deleteTeacher = createAsyncThunk(
   "teachers/deleteTeacher",
   async (id) => {
     try {
-      const res = await axios.delete(`http://localhost:3000/teachers/${id}`);
+      const res = await axios.delete(
+        `https://teachersapi.onrender.com/teachers/${id}`
+      );
       const data = await res.data;
       return data;
     } catch (error) {

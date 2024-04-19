@@ -19,7 +19,7 @@ const TeachersEdit = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/teachers/${id}`
+          `https://teachersapi.onrender.com/teachers/${id}`
         );
         const { name, group, sur, level } = response.data;
         setUserData(response.data);
@@ -38,7 +38,7 @@ const TeachersEdit = () => {
   const onSubmit = async (data) => {
     try {
       await axios
-        .put(`http://localhost:3000/teachers/${id}`, data)
+        .put(`https://teachersapi.onrender.com/teachers/${id}`, data)
         .then((res) => {
           setUserData(res.data);
         });
