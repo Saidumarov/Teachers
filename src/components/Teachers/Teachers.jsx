@@ -36,12 +36,18 @@ export default function Teachers() {
 
   // Delete the teacher
   const handleDelete = (id) => {
-    if (window.confirm("Delete Teacher ?")) {
-      dispatch(deleteTeacher(id));
-      toast.success("Delete Teacher Success ");
+    if (window.confirm("Delete Teacher?")) {
+      dispatch(deleteTeacher(id))
+        .then(() => {
+          toast.success("Delete Teacher Success");
+          // Redux store-ni qayta yuklash
+          dispatch(fetchTeachers());
+        })
+        .catch((error) => {
+          toast.error("Failed to delete teacher: " + error.message);
+        });
     }
   };
-
   //  Edit the teacher
   const edit = (id) => {
     navegate(`/teachers/edit/${id}`);

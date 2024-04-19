@@ -34,12 +34,18 @@ export default function Students() {
 
   //  Delete the Student
   const handleDelete = (id) => {
-    if (window.confirm("Delete Student? ")) {
-      dispatch(deleteStudent(id));
-      toast.success("Delete Student Success ");
+    if (window.confirm("Delete Student?")) {
+      dispatch(deleteStudent(id))
+        .then(() => {
+          toast.success("Delete Student Success");
+          // Redux store-ni qayta yuklash
+          dispatch(fetchStudents());
+        })
+        .catch((error) => {
+          toast.error("Failed to delete student: " + error.message);
+        });
     }
   };
-
   //  Edit the Student
   const edit = (id) => {
     navegate(`/students/edit/${id}`);
